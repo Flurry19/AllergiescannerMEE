@@ -28,10 +28,10 @@ import TheWelcome from '../components/TheWelcome.vue'
           <p>(leuk plaatje van een hand met een telefoon)</p>
         </div>
 
-        <div class="flex text-white text-center flex-col">
-          <button class="bg-orange-500 w-40 m-5 rounded ml-80">Begine met scannen</button>
-          <button class="bg-orange-500 w-40 m-5 rounded ml-80">Zoek uw product</button>
-          <button class="bg-orange-500 w-40 m-5 rounded ml-80">Geschiedenis</button>
+        <div class="text-white text-center items-center flex flex-col">
+          <button class="bg-orange-500 w-40 m-5 rounded-lg">Begine met scannen</button>
+          <button class="bg-orange-500 w-40 m-5 rounded-lg">Zoek uw product</button>
+          <button class="bg-orange-500 w-40 m-5 rounded-lg">Geschiedenis</button>
         </div>
       </div>
 
