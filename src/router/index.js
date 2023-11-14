@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import Productpage from '../views/ProductpageView.vue'
 import Ingredientlist from '../views/IngredientlistView.vue';
 import Ingredientview from '../views/IngredientlistSearchView.vue'
+import Favoritelist from '../views/FavoritelistView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,7 +27,11 @@ const router = createRouter({
       path: '/ingredientview',
       name: 'ingredientview',
       component: Ingredientview
-    },
+    },{
+      path: '/favoritelist',
+      name: 'favoritelist',
+      component: Favoritelist
+    }
   ]
 })
 
