@@ -27,7 +27,7 @@ const router = createRouter({
       path: '/ingredientview',
       name: 'ingredientview',
       component: Ingredientview
-    },
+    },{
       path: '/favoritelist',
       name: 'favoritelist',
       component: Favoritelist
