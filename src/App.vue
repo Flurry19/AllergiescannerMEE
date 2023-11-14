@@ -3,12 +3,11 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header style="background-color: #EF761F; display: flex; justify-content: space-between; align-items: center; padding: 10px; height: 60px; position: fixed; width: 100%; top: 0;">
+  <header class="bg-orange-500 flex justify-between items-center px-4 h-16 fixed w-full top-0">    <div>
+    <img src="your-logo-image.png" alt="Site Logo">
+  </div>
     <div>
-      <img src="your-logo-image.png" alt="Site Logo">
-    </div>
-    <div>
-      <h1 style="color: white; margin: 0; font-weight: bold; font-size: 2em;">MEE ROTTERDAM</h1>
+      <h1 class="text-white font-bold text-2xl m-0">MEE ROTTERDAM</h1>
     </div>
     <div>
       <button>
@@ -19,8 +18,8 @@ import { RouterLink, RouterView } from 'vue-router'
 
   <RouterView />
 
-  <footer style="background-color: #EF761F; display: flex; justify-content: space-around; align-items: center; height: 60px; position: fixed; width: 100%; bottom: 0;">
-    <nav style="border: 2px solid black; padding: 5px; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+  <footer class="bg-orange-500 flex justify-around items-center h-16 fixed w-full bottom-0">
+    <nav class="border-2 border-black p-5 w-full h-full flex flex-col items-center justify-center">
       <a href="ingredientlist">
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +44,7 @@ import { RouterLink, RouterView } from 'vue-router'
       </a>
     </nav>
 
-    <nav style="border: 2px solid black; padding: 5px; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
+    <nav class="border-2 border-black p-5 w-full h-full flex flex-col items-center justify-center">
       <a href="/">
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -66,8 +65,8 @@ import { RouterLink, RouterView } from 'vue-router'
       </a>
     </nav>
 
-    <nav style="border: 2px solid black; padding: 5px; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
-      <a href="productpage">
+    <nav class="border-2 border-black p-5 w-full h-full flex flex-col items-center justify-center">
+      <a href="favoritelist">
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -83,7 +82,6 @@ import { RouterLink, RouterView } from 'vue-router'
         </svg>
       </a>
     </nav>
-
   </footer>
 </template>
 
