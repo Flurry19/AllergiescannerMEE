@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Productpage from '../views/ProductpageView.vue'
+import Ingredientlist from '../views/IngredientlistView.vue';
+import Ingredientview from '../views/IngredientlistSearchView.vue'
 import Favoritelist from '../views/FavoritelistView.vue'
 
 const router = createRouter({
@@ -17,6 +19,15 @@ const router = createRouter({
       component: Productpage
     },
     {
+      path: '/ingredientlist',
+      name: 'ingredientlist',
+      component: Ingredientlist
+    },
+    {
+      path: '/ingredientview',
+      name: 'ingredientview',
+      component: Ingredientview
+    },
       path: '/favoritelist',
       name: 'favoritelist',
       component: Favoritelist
