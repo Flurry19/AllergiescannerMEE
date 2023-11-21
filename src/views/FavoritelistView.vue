@@ -1,10 +1,11 @@
 <template>
-  <div class="my-5">
+
+  <div class="mt-20 mb-5">
     <p class="text-center text-3xl font-bold">Zoek naar het product waarvan u de productinformatie wilt weten</p>
   </div>
 
   <div class="flex flex-col items-center ">
-    <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full">
+    <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full shadow-xl transform active:scale-75 transition-transform">
       Zoek producten
     </button>
   </div>
