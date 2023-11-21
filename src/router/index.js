@@ -4,6 +4,7 @@ import Productpage from '../views/ProductpageView.vue'
 import Ingredientlist from '../views/IngredientlistView.vue';
 import Ingredientview from '../views/IngredientlistSearchView.vue'
 import Favoritelist from '../views/FavoritelistView.vue'
+import Translation from '../views/TranslationView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,6 +32,10 @@ const router = createRouter({
       path: '/favoritelist',
       name: 'favoritelist',
       component: Favoritelist
+    },{
+      path: '/translation',
+      name: 'translation',
+      component: Translation
     }
   ]
 })
