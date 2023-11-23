@@ -5,6 +5,7 @@ import Ingredientlist from '../views/IngredientlistView.vue';
 import Ingredientview from '../views/IngredientlistSearchView.vue'
 import Favoritelist from '../views/FavoritelistView.vue'
 import Scanner from '../views/Scanner.vue';
+import Translation from '../views/TranslationView.vue'
 
 //Vue.use(VueRouter);
 
@@ -40,6 +41,11 @@ const router = createRouter({
       path: '/scanner',
       name: 'scanner',
       component: Scanner
+    },
+    {
+      path: '/translation',
+      name: 'translation',
+      component: Translation
     }
   ]
 })
