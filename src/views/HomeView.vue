@@ -13,9 +13,9 @@
         </div>
 
         <div class="text-white text-center items-center flex flex-col">
-          <button class="bg-orange-500 w-40 m-5 rounded-lg">Begine met scannen</button>
-          <button class="bg-orange-500 w-40 m-5 rounded-lg">Zoek uw product</button>
-          <button class="bg-orange-500 w-40 m-5 rounded-lg">Geschiedenis</button>
+          <router-link to="/scanner" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full mb-5">Begin met scannen</router-link>
+          <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full mb-5">Zoek uw product</button>
+          <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full mb-5">Geschiedenis</button>
         </div>
       </div>
       
