@@ -1,12 +1,12 @@
 <template>
-<header style="background-color: #EF761F; display: flex; justify-content: space-between; align-items: center; padding: 10px; height: 60px; position: fixed; width: 100%; top: 0;">
-<div>
+<header class="bg-orange-500 p-2 h-18 w-full text-center flex flex-col lg:flex-row">
+<div class="lg:block lg:w-1/3">
   <img src="your-logo-image.png" alt="Site Logo">
 </div>
-<div>
-  <h1 style="color: white; margin: 0; font-weight: bold; font-size: 2em;">MEE ROTTERDAM</h1>
+<div class="lg:block lg:w-1/3">
+  <h1 class="text-white font-bold text-xl lg:text-5xl">MEE Rotterdam Rijnmond</h1>
 </div>
-<div>
+<div class="lg:block lg:w-1/3">
   <button>
     <img src="instructions-icon.png" alt="Instructions Icon">
   </button>

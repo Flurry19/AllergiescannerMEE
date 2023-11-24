@@ -7,8 +7,11 @@ import Footer from './components/FooterView.vue'
 
 <template>
 <body class="bg-orange-400">
-<!--<Header/>-->
+
+<Header/>
+<main>
   <RouterView  />
+</main>
 <Footer/>
 </body>
 </template>
