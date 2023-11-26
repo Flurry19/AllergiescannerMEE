@@ -4,6 +4,7 @@ import Productpage from '../views/ProductpageView.vue'
 import Ingredientlist from '../views/IngredientlistView.vue';
 import Ingredientview from '../views/IngredientlistSearchView.vue'
 import Favoritelist from '../views/FavoritelistView.vue'
+import Allergy from '../views/AllergyView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,7 +22,7 @@ const router = createRouter({
     {
       path: '/ingredientlist',
       name: 'ingredientlist',
-      component: Ingredientlist
+      component: Ingredientlist,
     },
     {
       path: '/ingredientview',
@@ -31,8 +32,14 @@ const router = createRouter({
       path: '/favoritelist',
       name: 'favoritelist',
       component: Favoritelist
-    }
+    },
+    {
+      path: '/allergy',
+      name: 'allergy',
+      component: Allergy
+    },
   ]
 })
 
 export default router
+
