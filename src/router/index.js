@@ -43,6 +43,7 @@ const router = createRouter({
       name: 'allergy',
       component: Allergy
     },
+    {
       path: '/scanner',
       name: 'scanner',
       component: Scanner
