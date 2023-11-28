@@ -9,10 +9,10 @@
         </div>
     </div>
   </template>
-  
+
   <script>
   import { StreamBarcodeReader } from "vue-barcode-reader";
-  
+
   export default {
     name: "ScannerComp",
     components: {
@@ -47,4 +47,3 @@
 
   <style scoped>
   </style>
-  
