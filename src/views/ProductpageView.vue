@@ -1,3 +1,77 @@
+<script>
+
+
+import Popup from '../components/Popup.vue';
+
+export default {
+  components: {Popup},
+  setup (){
+    return{
+      Popup
+    }
+  },
+
+  data() {
+    return {
+      productName: '',
+      allergens: '',
+      productImage: '',
+      nutriScore: '',
+      ecoScore: '',
+      servingSize: '',
+      energykcal: '',
+      energykj: '',
+      fat: '',
+      saturatedFat: '',
+      carbohydrates: '',
+      sugars: '',
+      salt: '',
+      fiber: '',
+      proteins: '',
+      ingredients: '',
+    };
+  },
+  mounted() {
+    let barcode = this.$route.params.barcode; //Here goes the number of the scanned barcode (Stijn)
+    let url = `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`; //The API in which he places the variable above
+    fetch(url)
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error('Error: ${response.status}');
+          }
+        })
+        //Making a variable which you call in the HTML later and
+        .then(productInfo => {
+          this.productImage = productInfo.product.image_front_url;
+
+          this.productName = productInfo.product.product_name_nl;
+          this.allergens = productInfo.product.allergens;
+          this.nutriScore = productInfo.product.nutriscore_data.grade;
+          this.ecoScore = productInfo.product.ecoscore_data.grade;
+          this.servingSize = productInfo.product.serving_size;
+          this.energykcal = productInfo.product.nutriments['energy-kcal'];
+          this.energykj = productInfo.product.nutriments['energy-kj'];
+          this.fat = productInfo.product.nutriments['fat'];
+          this.saturatedFat = productInfo.product.nutriments['saturated-fat'];
+          this.carbohydrates = productInfo.product.nutriments['carbohydrates'];
+          this.sugars = productInfo.product.nutriments['sugars'];
+          this.salt = productInfo.product.nutriments['salt'];
+          this.fiber = productInfo.product.nutriments['fiber'];
+          this.proteins = productInfo.product.nutriments['proteins'];
+          this.ingredients = productInfo.product.ingredients_text_nl;
+
+
+        })
+        .catch(error => {
+          console.error(error);
+        })
+  }
+
+
+}
+</script>
 <template>
   <div class="bg-orange-400 lg:mx-12">
   <div class="flex lg:flex-row flex-col">
