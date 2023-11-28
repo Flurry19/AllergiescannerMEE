@@ -7,6 +7,7 @@ import Favoritelist from '../views/FavoritelistView.vue'
 import Allergy from '../views/AllergyView.vue'
 import Scanner from '../views/Scanner.vue';
 import Translation from '../views/TranslationView.vue'
+import Scanngeschiedenis from '../views/ScanngeschiedenisView.vue'
 
 //Vue.use(VueRouter);
 
@@ -52,8 +53,13 @@ const router = createRouter({
       path: '/translation',
       name: 'translation',
       component: Translation
-    }
-  ]
+    },
+{
+  path: '/Scanngeschiedis',
+      name: 'Scanngeschiedenis',
+    component: Scanngeschiedenis
+},
+]
 })
 
 export default router
