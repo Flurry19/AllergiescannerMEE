@@ -55,7 +55,7 @@ const router = createRouter({
       component: Translation
     },
 {
-  path: '/Scanngeschiedis',
+  path: '/Scanngeschiedenis',
       name: 'Scanngeschiedenis',
     component: Scanngeschiedenis
 },
