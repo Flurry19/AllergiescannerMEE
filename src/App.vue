@@ -6,7 +6,9 @@ import Footer from './components/FooterView.vue'
 </script>
 
 <template>
-<body class="bg-orange-400">
+
+
+<body class="bg-orange-400 my-0">
 
 <Header/>
 <main>

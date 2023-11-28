@@ -77,7 +77,7 @@ export default {
   <div class="bg-orange-400 lg:mx-12" id="productInfo">
   <div class="flex lg:flex-row flex-col">
    <div class="lg:w-5/12">
-     <img src="{{productImage}}" alt="Logo">
+     <img :src="productImage" alt="Product Image">
    </div>
     <div class="lg:w-7/12">
 
@@ -132,9 +132,9 @@ export default {
     <div class="lg:mx-8 w-full">
       <h1 class="font-bold text-center text-white text-3xl">Overige productinformatie</h1>
       <div class="lg:flex-row lg:flex ">
-      <div class="bg-white lg:my-4 lg:1/3 lg:p-4 rounded-xl">
+      <div class="bg-white lg:my-4 lg:1/3 lg:p-4 rounded-xl ">
         <h2 class="font-bold text-2xl">Nutri-Score: {{nutriScore}}</h2>
-        <div v-if="nutriScore === 'a'">
+        <div class="" v-if="nutriScore === 'a'">
           <img class="lg:w-96 w-64" src="public/img/Nutri-score-A.svg.png" alt="Nutri-score A">
         </div>
         <div v-else-if="nutriScore === 'b'">
