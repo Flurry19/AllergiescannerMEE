@@ -9,7 +9,7 @@
         </div>
     </div>
   </template>
-  
+
   <script>
   import { StreamBarcodeReader } from "vue-barcode-reader";
 import router from "../router";
@@ -49,4 +49,3 @@ import router from "../router";
 
   <style scoped>
   </style>
-  

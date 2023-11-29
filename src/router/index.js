@@ -4,8 +4,10 @@ import Productpage from '../views/ProductpageView.vue'
 import Ingredientlist from '../views/IngredientlistView.vue';
 import Ingredientview from '../views/IngredientlistSearchView.vue'
 import Favoritelist from '../views/FavoritelistView.vue'
+import Allergy from '../views/AllergyView.vue'
 import Scanner from '../views/Scanner.vue';
 import Translation from '../views/TranslationView.vue'
+import Scanngeschiedenis from '../views/ScanngeschiedenisView.vue'
 
 //Vue.use(VueRouter);
 
@@ -25,7 +27,7 @@ const router = createRouter({
     {
       path: '/ingredientlist',
       name: 'ingredientlist',
-      component: Ingredientlist
+      component: Ingredientlist,
     },
     {
       path: '/ingredientview',
@@ -38,6 +40,11 @@ const router = createRouter({
       component: Favoritelist
     },
     {
+      path: '/allergy',
+      name: 'allergy',
+      component: Allergy
+    },
+    {
       path: '/scanner',
       name: 'scanner',
       component: Scanner
@@ -46,8 +53,14 @@ const router = createRouter({
       path: '/translation',
       name: 'translation',
       component: Translation
-    }
-  ]
+    },
+{
+  path: '/Scanngeschiedenis',
+      name: 'Scanngeschiedenis',
+    component: Scanngeschiedenis
+},
+]
 })
 
 export default router
+

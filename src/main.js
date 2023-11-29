@@ -5,6 +5,11 @@ import App from './App.vue'
 import router from './router'
 import { createI18n } from 'vue-i18n'
 
+
+// import axios from 'axios'
+//
+// Vue.prototype.$http = axios;
+
 const messages = {
     en: {
         message: {
@@ -29,6 +34,7 @@ const i18n = createI18n({
     // If you need to specify other options, you can set other options
     // ...
 })
+
 const app = createApp(App)
 
 app.use(router)
