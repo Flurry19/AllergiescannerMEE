@@ -32,7 +32,7 @@ export default {
     };
   },
   mounted() {
-    let barcode = '20047559  '; //Here goes the number of the scanned barcode (Stijn)
+    let barcode = this.$route.params.barcode; //Here goes the number of the scanned barcode (Stijn)
     let url = `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`; //The API in which he places the variable above
     fetch(url)
         .then(response => {
