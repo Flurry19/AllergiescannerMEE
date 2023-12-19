@@ -8,7 +8,7 @@
 <!--            <input type="text" v-model="searchQuery" placeholder="Zoek ingrediënten" id="searchBar" class="rounded-l-full bg-orange-500 px-2 py-1 text-white">-->
 <!--            <button class="rounded-r-full bg-orange-500 px-2 py-1" @click="searchIngredients">-->
       <div>
-        <p class="text-center m-5 font-bold">Zoek naar ingrediënten die voor u het belangrijkst zijn.</p>
+        <p class="text-center font-bold">Zoek naar ingrediënten die voor u het belangrijkst zijn.</p>
         <div class="text-center m-5">
           <div class="flex items-center justify-center">
             <input type="text" placeholder="Zoek ingrediënten" id="searchBar" class="rounded-l-full bg-orange-500 px-2 py-1 text-white">
@@ -56,14 +56,32 @@
                     stroke-linejoin="round"
                     style="margin-right: 5px;"
                 >
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="12" y1="8" x2="12" y2="16"></line>
-                  <line x1="8" y1="12" x2="16" y2="12"></line>
+                  <circle cx="13" cy="12" r="10"></circle>
+                  <line x1="13" y1="8" x2="13" y2="16"></line>
+                  <line x1="9" y1="12" x2="17" y2="12"></line>
                 </svg>
               </router-link>
             </button>
-            <button class="rounded-r-full bg-orange-500 hover:bg-orange-700 mb-4 font-bold px-1 py-1 min-w-[100px] transform active:scale-75 transformation-transform" @click="toggleCheck(index)">
+            <button class="bg-orange-500 hover:bg-orange-700 mb-4 font-bold px-1 py-1 min-w-[100px] transform active:scale-75 transformation-transform" @click="toggleCheck(index)">
               {{ item.checked ? getSelectedIngredientText(index) || 'Toevoegen' : getSelectedIngredientText(index) || 'Toevoegen'}}
+            </button>
+            <button class="rounded-r-full bg-orange-500 hover:bg-orange-700 mb-4 px-1 py-1">
+              <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  style="margin-right: 5px;"
+                  @click="removeIngredient(index)"
+              >
+                <circle cx="13" cy="12" r="10"></circle>
+                <line x1="9" y1="12" x2="17" y2="12"></line>
+              </svg>
             </button>
           </div>
         </main>
@@ -76,8 +94,8 @@
   export default {
     data() {
       return {
-        // Een array met 8 checkbox-items met 'checked' eigenschap
-        items: Array.from({ length: 9 }, () => ({ checked: false })),
+        // Een array met checkbox-items met 'checked' eigenschap
+        items: Array.from({ length: 11 }, () => ({ checked: false })),
         // Variabele om de geselecteerde ingrediënten op te slaan
         routeQuery: [],
       };
@@ -114,6 +132,36 @@
 
         // Sla de bijgewerkte lijst van opgeslagen allergieën op in localStorage
         localStorage.setItem('Allergy', JSON.stringify(storedAllergies));
+      },
+      removeIngredient(index) {
+        // Haal de geselecteerde ingrediënten op uit de lokale opslag
+        let storedIngredients = JSON.parse(localStorage.getItem('Ingredient')) || [];
+
+        // Haal de opgeslagen allergieën op uit de lokale opslag
+        let storedAllergies = JSON.parse(localStorage.getItem('Allergy')) || [];
+
+        // Controleer of de te verwijderen index binnen de grenzen van de opgeslagen ingrediënten ligt
+        if (index >= 0 && index < storedIngredients.length) {
+          const ingredientToRemove = storedIngredients[index];
+
+          // Controleer of het te verwijderen ingrediënt een allergie is
+          if (!storedAllergies.includes(ingredientToRemove)) {
+            // Verwijder het ingrediënt als het geen allergie is
+            storedIngredients.splice(index, 1);
+
+            // Update de lokale opslag met de nieuwe lijst van ingrediënten zonder het verwijderde ingrediënt
+            localStorage.setItem('Ingredient', JSON.stringify(storedIngredients));
+
+            // Herstel de geüpdatete lijst van ingrediënten in de component data om de weergave bij te werken
+            this.routeQuery = storedIngredients;
+
+            // Herstel de aangevinkte status van checkbox-items na verwijdering van ingrediënten
+            this.restoreCheckedStatus();
+          } else {
+            // Ingrediënt is een allergie, toon bijvoorbeeld een melding aan de gebruiker
+            alert('Dit ingrediënt kan niet worden verwijderd omdat het is opgeslagen als een allergie.');
+          }
+        }
       },
       // Functie om de aangevinkte status van checkbox-items te herstellen
       restoreCheckedStatus() {
