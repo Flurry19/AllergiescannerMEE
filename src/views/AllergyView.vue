@@ -20,7 +20,7 @@ export default {
   data() {
     // De lijst van voedselallergieën
     return {
-      ingredients: ['Vis', 'Noten', 'Pinda', 'Melk', 'Ei', 'Tarwe', 'Soja', 'Sesamzaad', 'Gluten'], // Voeg hier meer ingrediënten toe indien nodig
+      ingredients: ['Vis', 'Noten', 'Pinda', 'Melk', 'Ei', 'Tarwe', 'Soja', 'Sesamzaad', 'Gluten', 'Schaaldieren', 'Bessen'], // Voeg hier meer ingrediënten toe indien nodig
     };
   },
   methods: {
