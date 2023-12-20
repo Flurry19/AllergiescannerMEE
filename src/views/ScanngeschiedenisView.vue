@@ -6,12 +6,15 @@
     </div>
 
     <div class="mt-5 mb-5">
-      <p class="text-center text-3xl font-bold">Hier vindt u de producten die u in het verleden heeft gescand</p>
+      <p class="text-center text-3xl font-bold" :class="{ 'enlarged-text': isTextEnlarged }">Hier vindt u de producten die u in het verleden heeft gescand</p>
     </div>
 
     <div class="flex flex-col items-center ">
       <button @click="toggleColors" id="toggleColorButton" class="absolute top-0 left-0 m-4 p-2">
         <img src="img/darkmode.png" alt="logo">
+      </button>
+      <button @click="toggleTextSize" class="absolute top-0 right-0 m-4 p-2">
+        Vergroot tekst
       </button>
       <button class="bg-orange-500 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-full shadow-xl transform active:scale-75 transition-transform">
         Product scannen
@@ -19,7 +22,7 @@
     </div>
 
     <div class="my-5">
-      <p class="text-center text-5xl font-bold">Uw gescande producten:</p>
+      <p class="text-center text-5xl font-bold" >Uw gescande producten:</p>
     </div>
 
     <div :class="{ 'bg-orange-500': isOrange, 'bg-gray-500': !isOrange }">
@@ -28,9 +31,8 @@
         <div @mouseover="hoverEffect(1)" @mouseout="resetHoverEffect" @click="selectProduct" class="product-card bg-white rounded overflow-hidden shadow-lg" :class="{ 'border-orange-700': isHovered === 1 && isOrange, 'border-gray-500': isHovered === 1 && !isOrange, 'z-10': isHovered === 1 }">
           <img class="w-full" src="img/egg.png" alt="product01">
           <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2">Egg</div>
-            <p class="text-gray-700 text-base">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
+            <div class="font-bold text-xl mb-2" :class="{ 'enlarged-text': isTextEnlarged }">Egg</div>
+            <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
             </p>
           </div>
           <div class="px-6 pt-4 pb-2">
@@ -44,8 +46,8 @@
         <div @mouseover="hoverEffect(2)" @mouseout="resetHoverEffect" @click="selectProduct" class="product-card bg-white rounded overflow-hidden shadow-lg" :class="{ 'border-orange-700': isHovered === 1 && isOrange, 'border-gray-500': isHovered === 1 && !isOrange, 'z-10': isHovered === 1 }">
           <img class="w-full" src="img/Fish.png" alt="product01">
           <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2">Fish</div>
-            <p class="text-gray-700 text-base">
+            <div class="font-bold text-xl mb-2" :class="{ 'enlarged-text': isTextEnlarged }">Fish</div>
+            <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
             </p>
           </div>
@@ -60,8 +62,8 @@
         <div @mouseover="hoverEffect(3)" @mouseout="resetHoverEffect" @click="selectProduct" class="product-card bg-white rounded overflow-hidden shadow-lg" :class="{ 'border-orange-700': isHovered === 1 && isOrange, 'border-gray-500': isHovered === 1 && !isOrange, 'z-10': isHovered === 1 }">
           <img class="w-full" src="img/gluten.png" alt="product01">
           <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2">Gluten</div>
-            <p class="text-gray-700 text-base">
+            <div class="font-bold text-xl mb-2" :class="{ 'enlarged-text': isTextEnlarged }">Gluten</div>
+            <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
             </p>
           </div>
@@ -76,8 +78,8 @@
         <div @mouseover="hoverEffect(4)" @mouseout="resetHoverEffect" @click="selectProduct" class="product-card bg-white rounded overflow-hidden shadow-lg" :class="{ 'border-orange-700': isHovered === 1 && isOrange, 'border-gray-500': isHovered === 1 && !isOrange, 'z-10': isHovered === 1 }">
           <img class="w-full" src="img/Pinda.png" alt="product01">
           <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2">Pinda</div>
-            <p class="text-gray-700 text-base">
+            <div class="font-bold text-xl mb-2" :class="{ 'enlarged-text': isTextEnlarged }">Pinda</div>
+            <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
             </p>
           </div>
@@ -92,8 +94,8 @@
         <div @mouseover="hoverEffect(5)" @mouseout="resetHoverEffect" @click="selectProduct" class="product-card bg-white rounded overflow-hidden shadow-lg" :class="{ 'border-orange-700': isHovered === 1 && isOrange, 'border-gray-500': isHovered === 1 && !isOrange, 'z-10': isHovered === 1 }">
           <img class="w-full" src="img/kellogscornflakes.png" alt="product01">
           <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2">kellogs</div>
-            <p class="text-gray-700 text-base">
+            <div class="font-bold text-xl mb-2" :class="{ 'enlarged-text': isTextEnlarged }">Kellogs</div>
+            <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
             </p>
           </div>
@@ -108,8 +110,8 @@
         <div @mouseover="hoverEffect(6)" @mouseout="resetHoverEffect" @click="selectProduct" class="product-card bg-white rounded overflow-hidden shadow-lg" :class="{ 'border-orange-700': isHovered === 1 && isOrange, 'border-gray-500': isHovered === 1 && !isOrange, 'z-10': isHovered === 1 }">
           <img class="w-full" src="img/Broccoli.png" alt="product01">
           <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2">Broccoli</div>
-            <p class="text-gray-700 text-base">
+            <div class="font-bold text-xl mb-2" :class="{ 'enlarged-text': isTextEnlarged }">Brocolli</div>
+            <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
             </p>
           </div>
@@ -120,7 +122,6 @@
           </div>
         </div>
 
-        <!-- Voeg meer producten op dezelfde manier toe -->
 
       </div>
     </div>
@@ -133,12 +134,15 @@ export default {
     return {
       isHovered: null,
       isOrange: true,
+      isTextEnlarged: false,
     };
   },
   methods: {
     toggleColors() {
       this.isOrange = !this.isOrange;
-      // Voeg hier logica toe om kleuren van andere elementen aan te passen
+    },
+    toggleTextSize() {
+      this.isTextEnlarged = !this.isTextEnlarged;
     },
     hoverEffect(index) {
       this.isHovered = index;
@@ -172,5 +176,8 @@ export default {
   border: 4px solid #ff6d00; /* Gebruik een oranje kleur bij hover als de achtergrond oranje is */
 }
 
-
+/* Voeg deze stijl toe voor vergroten van tekst */
+.enlarged-text {
+  font-size: 2em; /* Pas dit aan naar de gewenste vergrotingsfactor */
+}
 </style>
