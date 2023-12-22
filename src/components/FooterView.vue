@@ -47,7 +47,7 @@
     </nav>
 
     <nav class="border-2 border-black p-2 w-full h-full flex justify-center items-center">
-      <a href="productpage">
+      <a href="favoritelist">
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
