@@ -3,7 +3,7 @@
     <div class="flex flex-col h-screen">
 
       <div class="bg-white flex-auto">
-        <div class="text-black font-bold text-center">
+        <div class="text-center text-3xl font-bold mt-10 mb-5 text-black font-bold text-center">
           <p>Productinformatie weten?</p>
           <p>Scan de barcode van het product.</p>
         </div>
