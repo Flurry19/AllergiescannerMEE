@@ -3,7 +3,6 @@
 <!--    <div class="mt-20 mb-5">-->
 <!--      <p class="text-center text-3xl font-bold">Zoek naar het product waarvan u de productinformatie wilt weten</p>-->
 <!--    </div>-->
-
 <!--    <div class="flex flex-col items-center">-->
 <!--      <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full shadow-xl transform active:scale-75 transition-transform">-->
 <!--        Zoek producten-->
@@ -16,8 +15,10 @@
 
     <div class="bg-orange-500 mb-10 p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
       <!-- Use v-for to dynamically create FavoriteCard components -->
-      <FavoriteCard v-for="product in favoriteProducts" :barcode="product.barcode" :productImage="product.productImage" :productName="product.productName" :key="product.barcode" :product="product" />
-    </div>
+      <div class="group transition hover:-translate-y-1 hover:scale-110 duration-500 bg-white rounded overflow-hidden shadow-lg ring-1 ring-slate-900/5 hover:bg-orange-700 hover:ring-orange-700 justify-center">
+        <FavoriteCard v-for="product in favoriteProducts" :barcode="product.barcode" :productImage="product.productImage" :productName="product.productName" :key="product.barcode" :product="product" />
+        </div>
+      </div>
   </div>
 </template>
 
