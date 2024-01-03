@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white">
-    <div class="pt-20">
+    <div class="pt-10">
 <!--      <div>-->
 <!--        <p class="text-center m-5 font-bold">Zoek naar ingrediënten die voor u het belangrijkst zijn.</p>-->
 <!--        <div class="text-center m-5">-->
@@ -33,7 +33,7 @@
           </div>
         </div>
 
-        <h1 class="text-center my-10 text-5xl font-bold">Uw ingrediëntenlijst:</h1>
+        <h1 class="text-center my-10 text-3xl font-bold">Uw ingrediëntenlijst:</h1>
 
         <main class="text-center mb-20">
           <div v-for="(item, index) in items" :key="index" class="flex items-center justify-center">
