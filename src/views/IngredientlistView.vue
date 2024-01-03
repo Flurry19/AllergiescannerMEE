@@ -8,7 +8,7 @@
 <!--            <input type="text" v-model="searchQuery" placeholder="Zoek ingrediënten" id="searchBar" class="rounded-l-full bg-orange-500 px-2 py-1 text-white">-->
 <!--            <button class="rounded-r-full bg-orange-500 px-2 py-1" @click="searchIngredients">-->
       <div>
-        <p class="text-center font-bold">Zoek naar ingrediënten die voor u het belangrijkst zijn.</p>
+        <p class="text-center font-bold text-xl">Zoek naar ingrediënten die voor u het belangrijkst zijn.</p>
         <div class="text-center m-5">
           <div class="flex items-center justify-center">
             <input type="text" placeholder="Zoek ingrediënten" id="searchBar" class="rounded-l-full bg-orange-500 px-2 py-1 text-white">
