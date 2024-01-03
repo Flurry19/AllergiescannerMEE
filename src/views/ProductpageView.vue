@@ -40,8 +40,11 @@ export default {
       ingredients: '',
       isOpenNutri:true,
       isOpenEco:true,
+      barcode: '',
+      favoriteBarcodes: [],
       allergensArray: [],
-      nonAllergensArray: [],
+      nonAllergensArray: []
+
     };
   },
   computed: {
@@ -50,6 +53,9 @@ export default {
     },
     isModalNutriVisible(){
       return !this.isOpenNutri;
+    },
+    isBarcodeInList() {
+      return this.favoriteBarcodes.includes(this.barcode);
     }
   },
   methods: {
@@ -107,10 +113,25 @@ export default {
     },
     onToggleEco() {
       this.isOpenEco = !this.isOpenEco;
+    },
+
+    toggleBarcode() {
+      // Toggle the barcode in the array
+      if (this.isBarcodeInList) {
+        this.favoriteBarcodes = this.favoriteBarcodes.filter(b => b !== this.barcode);
+      } else {
+        this.favoriteBarcodes.push(this.barcode);
+      }
+
+      // Save the updated array back to local storage
+      localStorage.setItem('favoriteBarcodes', JSON.stringify(this.favoriteBarcodes));
     }
   },
   mounted() {
-    let barcode = this.$route.params.barcode; //Here goes the number of the scanned barcode
+    this.barcode = this.$route.params.barcode; //Here goes the number of the scanned barcode (Stijn)
+    this.favoriteBarcodes = JSON.parse(localStorage.getItem('favoriteBarcodes')) || [];
+    let barcode = this.barcode
+
     let url = `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`; //The API in which he places the variable above
     fetch(url)
         .then(response => {
@@ -138,7 +159,12 @@ export default {
           this.fiber = productInfo.product.nutriments['fiber'];
           this.proteins = productInfo.product.nutriments['proteins'];
           this.ingredients = productInfo.product.ingredients_text_nl;
+
+
+          this.$emit('productDataChanged', { barcode: this.barcode, productName: this.productName, productImage: this.productImage });
+
           this.allergenCheck();
+
         })
         .catch(error => {
           console.error(error);
@@ -146,7 +172,6 @@ export default {
 
   },
 };
-
 
 </script>
 <template>
@@ -401,6 +426,9 @@ export default {
 
     </div>
     </div>
+    <button @click="toggleBarcode">
+      {{ isBarcodeInList ? 'Verwijder van favorieten' : 'Voeg toe aan favorieten' }}
+    </button>
 
 
   <a href="/" class="btn btn-primary bg-orange-600 px-4 py-2 rounded-xl text-3xl mx-4">Terug</a>
