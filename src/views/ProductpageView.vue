@@ -239,19 +239,19 @@ export default {
         <div class="bg-white lg:my-4 lg:1/3 lg:p-4 rounded-xl ">
           <h2 class="font-bold text-2xl">Nutri-Score: {{nutriScore}}</h2>
           <div class="" v-if="nutriScore === 'a'">
-            <img class="lg:w-96 w-64" src="public/img/Nutri-score-A.svg.png" alt="Nutri-score A">
+            <img class="lg:w-96 w-64" src="/img/Nutri-score-A.svg.png" alt="Nutri-score A">
           </div>
           <div v-else-if="nutriScore === 'b'">
-            <img class="lg:w-96 w-64" src="public/img/Nutri-score-B.svg.png" alt="Nutri-score B">
+            <img class="lg:w-96 w-64" src="/img/Nutri-score-B.svg.png" alt="Nutri-score B">
           </div>
           <div v-else-if="nutriScore === 'c'">
-            <img class="lg:w-96 w-64" src="public/img/2560px-Nutri-score-C.svg.png" alt="Nutri-score C">
+            <img class="lg:w-96 w-64" src="/img/2560px-Nutri-score-C.svg.png" alt="Nutri-score C">
           </div>
           <div v-else-if="nutriScore === 'd'">
-            <img class="lg:w-96 w-64" src="public/img/2560px-Nutri-score-D.svg.png" alt="Nutri-score D">
+            <img class="lg:w-96 w-64" src="/img/2560px-Nutri-score-D.svg.png" alt="Nutri-score D">
           </div>
           <div v-else-if="nutriScore === 'e'">
-            <img class="lg:w-96 w-64" src="public/img/2560px-Nutri-score-E.svg.png" alt="Nutri-score E">
+            <img class="lg:w-96 w-64" src="/img/2560px-Nutri-score-E.svg.png" alt="Nutri-score E">
           </div>
 
           <div id="app">
