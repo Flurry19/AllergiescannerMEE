@@ -16,9 +16,7 @@
       <button @click="toggleTextSize" class="absolute top-0 right-0 m-4 p-2">
         Vergroot tekst
       </button>
-      <button class="bg-orange-500 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-full shadow-xl transform active:scale-75 transition-transform">
-        Product scannen
-      </button>
+      <router-link to="/scanner" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full mb-5">Begin met scannen</router-link>
     </div>
 
     <div class="my-5">
@@ -32,7 +30,16 @@
           <img class="w-full" src="img/egg.png" alt="product01">
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2" :class="{ 'enlarged-text': isTextEnlarged }">Egg</div>
-            <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
+            <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">
+              Ingedientenlijst:
+
+              Allergie:
+
+              Nutri-score:
+
+              Voedingsvoorwaarden:
+
+              Calorienverdeling:
             </p>
           </div>
           <div class="px-6 pt-4 pb-2">
@@ -48,7 +55,15 @@
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2" :class="{ 'enlarged-text': isTextEnlarged }">Fish</div>
             <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
+           Ingedientenlijst:
+
+              Allergie:
+
+              Nutri-score:
+
+              Voedingsvoorwaarden:
+
+              Calorienverdeling:
             </p>
           </div>
           <div class="px-6 pt-4 pb-2">
@@ -64,7 +79,15 @@
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2" :class="{ 'enlarged-text': isTextEnlarged }">Gluten</div>
             <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
+              Ingedientenlijst:
+
+              Allergie:
+
+              Nutri-score:
+
+              Voedingsvoorwaarden:
+
+              Calorienverdeling:
             </p>
           </div>
           <div class="px-6 pt-4 pb-2">
@@ -80,7 +103,15 @@
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2" :class="{ 'enlarged-text': isTextEnlarged }">Pinda</div>
             <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
+              Ingedientenlijst:
+
+              Allergie:
+
+              Nutri-score:
+
+              Voedingsvoorwaarden:
+
+              Calorienverdeling:
             </p>
           </div>
           <div class="px-6 pt-4 pb-2">
@@ -96,7 +127,15 @@
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2" :class="{ 'enlarged-text': isTextEnlarged }">Kellogs</div>
             <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
+              Ingedientenlijst:
+
+              Allergie:
+
+              Nutri-score:
+
+              Voedingsvoorwaarden:
+
+              Calorienverdeling:
             </p>
           </div>
           <div class="px-6 pt-4 pb-2">
@@ -112,7 +151,15 @@
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2" :class="{ 'enlarged-text': isTextEnlarged }">Brocolli</div>
             <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
+              Ingedientenlijst:
+
+              Allergie:
+
+              Nutri-score:
+
+              Voedingsvoorwaarden:
+
+              Calorienverdeling:
             </p>
           </div>
           <div class="px-6 pt-4 pb-2">
