@@ -8,32 +8,32 @@
 <!--            <input type="text" v-model="searchQuery" placeholder="Zoek ingrediënten" id="searchBar" class="rounded-l-full bg-orange-500 px-2 py-1 text-white">-->
 <!--            <button class="rounded-r-full bg-orange-500 px-2 py-1" @click="searchIngredients">-->
       <div>
-        <p class="text-center font-bold text-xl">Zoek naar ingrediënten die voor u het belangrijkst zijn.</p>
-        <div class="text-center m-5">
-          <div class="flex items-center justify-center">
-            <input type="text" placeholder="Zoek ingrediënten" id="searchBar" class="rounded-l-full bg-orange-500 px-2 py-1 text-white">
-            <button class="rounded-r-full bg-orange-500 px-2 py-1">
-              <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="black"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  style="margin-right: 5px;"
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <circle cx="14" cy="10" r="5" stroke-width="1" fill="transparent"></circle>
-                <line x1="5.25" y1="19" x2="10.25" y2="14" stroke-width="1"></line>
-              </svg>
-            </button>
-          </div>
-        </div>
+<!--        <p class="text-center font-bold text-xl">Zoek naar ingrediënten die voor u het belangrijkst zijn.</p>-->
+<!--        <div class="text-center m-5">-->
+<!--          <div class="flex items-center justify-center">-->
+<!--            <input type="text"  id="searchBar" class="rounded-l-full bg-orange-500 px-2 py-1 text-white">-->
+<!--            <button class="rounded-r-full bg-orange-500 px-2 py-1">-->
+<!--              <svg-->
+<!--                  xmlns="http://www.w3.org/2000/svg"-->
+<!--                  width="24"-->
+<!--                  height="24"-->
+<!--                  viewBox="0 0 24 24"-->
+<!--                  fill="none"-->
+<!--                  stroke="black"-->
+<!--                  stroke-width="2"-->
+<!--                  stroke-linecap="round"-->
+<!--                  stroke-linejoin="round"-->
+<!--                  style="margin-right: 5px;"-->
+<!--              >-->
+<!--                <circle cx="12" cy="12" r="10"></circle>-->
+<!--                <circle cx="14" cy="10" r="5" stroke-width="1" fill="transparent"></circle>-->
+<!--                <line x1="5.25" y1="19" x2="10.25" y2="14" stroke-width="1"></line>-->
+<!--              </svg>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </div>-->
 
-        <h1 class="text-center my-10 text-3xl font-bold">Uw ingrediëntenlijst:</h1>
+        <h1 class="text-center mt-0 mb-8 text-3xl font-bold">Uw ingrediëntenlijst:</h1>
 
         <main class="text-center mb-20">
           <div v-for="(item, index) in items" :key="index" class="flex items-center justify-center">
@@ -62,7 +62,7 @@
                 </svg>
               </router-link>
             </button>
-            <button class="bg-orange-500 hover:bg-orange-700 mb-4 font-bold px-1 py-1 min-w-[100px] transform active:scale-75 transformation-transform" @click="toggleCheck(index)">
+            <button class="bg-orange-500 mb-4 font-bold px-1 py-1 min-w-[100px]">
               {{ item.checked ? getSelectedIngredientText(index) || 'Toevoegen' : getSelectedIngredientText(index) || 'Toevoegen'}}
             </button>
             <button class="rounded-r-full bg-orange-500 hover:bg-orange-700 mb-4 px-1 py-1">

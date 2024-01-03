@@ -2,7 +2,7 @@
   <div>
     <!-- Logo boven in het midden -->
     <div class="flex justify-center items-center my-5">
-      <img src="img/MEE-23-11-2023.png" alt="Logo" class="h-26 w-26">
+<!--      <img src="/img/MEE-23-11-2023.png" alt="Logo" class="h-26 w-26">-->
     </div>
 
     <div class="mt-5 mb-5">
@@ -11,7 +11,7 @@
 
     <div class="flex flex-col items-center ">
       <button @click="toggleColors" id="toggleColorButton" class="absolute top-0 left-0 m-4 p-2">
-        <img src="img/darkmode.png" alt="logo">
+        <img src="/img/darkmode.png" alt="logo">
       </button>
       <button class="bg-orange-500 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-full shadow-xl transform active:scale-75 transition-transform">
         Product scannen
@@ -26,7 +26,7 @@
       <div class="p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
         <!-- Product 1 -->
         <div @mouseover="hoverEffect(1)" @mouseout="resetHoverEffect" @click="selectProduct" class="product-card bg-white rounded overflow-hidden shadow-lg" :class="{ 'border-orange-700': isHovered === 1 && isOrange, 'border-gray-500': isHovered === 1 && !isOrange, 'z-10': isHovered === 1 }">
-          <img class="w-full" src="img/egg.png" alt="product01">
+          <img class="w-full" src="/img/egg.png" alt="product01">
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2">Egg</div>
             <p class="text-gray-700 text-base">
@@ -42,7 +42,7 @@
 
         <!-- Product 2 -->
         <div @mouseover="hoverEffect(2)" @mouseout="resetHoverEffect" @click="selectProduct" class="product-card bg-white rounded overflow-hidden shadow-lg" :class="{ 'border-orange-700': isHovered === 1 && isOrange, 'border-gray-500': isHovered === 1 && !isOrange, 'z-10': isHovered === 1 }">
-          <img class="w-full" src="img/Fish.png" alt="product01">
+          <img class="w-full" src="/img/Fish.png" alt="product01">
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2">Fish</div>
             <p class="text-gray-700 text-base">
@@ -58,7 +58,7 @@
 
         <!-- Product 3 -->
         <div @mouseover="hoverEffect(3)" @mouseout="resetHoverEffect" @click="selectProduct" class="product-card bg-white rounded overflow-hidden shadow-lg" :class="{ 'border-orange-700': isHovered === 1 && isOrange, 'border-gray-500': isHovered === 1 && !isOrange, 'z-10': isHovered === 1 }">
-          <img class="w-full" src="img/gluten.png" alt="product01">
+          <img class="w-full" src="/img/gluten.png" alt="product01">
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2">Gluten</div>
             <p class="text-gray-700 text-base">
@@ -74,7 +74,7 @@
 
         <!-- Product 4 -->
         <div @mouseover="hoverEffect(4)" @mouseout="resetHoverEffect" @click="selectProduct" class="product-card bg-white rounded overflow-hidden shadow-lg" :class="{ 'border-orange-700': isHovered === 1 && isOrange, 'border-gray-500': isHovered === 1 && !isOrange, 'z-10': isHovered === 1 }">
-          <img class="w-full" src="img/Pinda.png" alt="product01">
+          <img class="w-full" src="/img/Pinda.png" alt="product01">
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2">Pinda</div>
             <p class="text-gray-700 text-base">
@@ -90,7 +90,7 @@
 
         <!-- Product 5 -->
         <div @mouseover="hoverEffect(5)" @mouseout="resetHoverEffect" @click="selectProduct" class="product-card bg-white rounded overflow-hidden shadow-lg" :class="{ 'border-orange-700': isHovered === 1 && isOrange, 'border-gray-500': isHovered === 1 && !isOrange, 'z-10': isHovered === 1 }">
-          <img class="w-full" src="img/kellogscornflakes.png" alt="product01">
+          <img class="w-full" src="/img/kellogscornflakes.png" alt="product01">
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2">kellogs</div>
             <p class="text-gray-700 text-base">
@@ -106,7 +106,7 @@
 
         <!-- Product 6 -->
         <div @mouseover="hoverEffect(6)" @mouseout="resetHoverEffect" @click="selectProduct" class="product-card bg-white rounded overflow-hidden shadow-lg" :class="{ 'border-orange-700': isHovered === 1 && isOrange, 'border-gray-500': isHovered === 1 && !isOrange, 'z-10': isHovered === 1 }">
-          <img class="w-full" src="img/Broccoli.png" alt="product01">
+          <img class="w-full" src="/img/Broccoli.png" alt="product01">
           <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2">Broccoli</div>
             <p class="text-gray-700 text-base">

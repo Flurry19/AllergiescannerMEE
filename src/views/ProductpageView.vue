@@ -62,7 +62,7 @@ export default {
     //With this function you check if the filtered allergens match the allergens in the product
     allergenCheck(){
       const dataArray = this.allergens.split(',');
-      let items = localStorage.getItem("Allergy");
+      let items = localStorage.getItem("Ingredient");
       items = JSON.parse(items);
       for (let i = 0; i < items.length; i++) {
         const allergen = items[i];
@@ -177,34 +177,46 @@ export default {
 <template>
 
   <div class="bg-orange-400 lg:mx-12" id="productInfo">
+
   <div class="flex lg:flex-row flex-col">
    <div class="lg:w-5/12 flex justify-center items-center">
      <img :src="productImage" alt="Product Image">
+
    </div>
+
     <div class="lg:w-7/12">
-
+      <button class="text-xl font-bold bg-orange-600 rounded-xl p-2" @click="toggleBarcode">
+        {{ isBarcodeInList ? 'Verwijder van favorieten' : 'Voeg toe aan favorieten' }}
+      </button>
       <h1 class="text-center font-bold text-white text-5xl p-4">{{ productName }}</h1>
-      <div  class="bg-green-400">
-        <h1 class="text-center font-bold text-3xl">Dit product bevat geen:</h1>
-        <div class="flex flex-row">
-          <div class="w-5/12 mx-12">
-            <ul>
-<!--              <li class="h-12"><img class="w-12" src="/img/Fish.png" alt="Vis"></li>-->
-<!--              <li class="h-12"><img class="w-12" src="/img/Pinda.png" alt="Pinda"></li>-->
+<!--      <div  class="bg-green-400">-->
+<!--        <h1 class="text-center font-bold text-3xl">Dit product bevat geen:</h1>-->
+<!--        <div class="flex flex-row">-->
+<!--          <div class="w-5/12 mx-12">-->
+<!--            <ul>-->
+<!--&lt;!&ndash;              <li class="h-12"><img class="w-12" src="/img/Fish.png" alt="Vis"></li>&ndash;&gt;-->
+<!--&lt;!&ndash;              <li class="h-12"><img class="w-12" src="/img/Pinda.png" alt="Pinda"></li>&ndash;&gt;-->
 
-            </ul>
-          </div>
-          <div class="w-7/12">
-            <ul>
+<!--            </ul>-->
+<!--          </div>-->
+<!--          <div class="w-7/12">-->
+<!--            <ul>-->
 
-              <li class="h-12 font-bold text-xl" v-for="nonAllergenItem in nonAllergensArray"> {{nonAllergenItem}} </li>
-<!--              <li class="h-12 font-bold text-xl">Pinda</li>-->
-            </ul>
-          </div>
-        </div>
-      </div>
+<!--              <li class="h-12 font-bold text-xl" v-for="nonAllergenItem in nonAllergensArray"> {{nonAllergenItem}} </li>-->
+<!--&lt;!&ndash;              <li class="h-12 font-bold text-xl">Pinda</li>&ndash;&gt;-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<div v-if="allergensArray.length === 0">
+  <div class="bg-green-400 ">
+    <p class="h-12 font-bold text-xl">Dit product is veilig!</p>
+  </div>
+
+</div>
+  <div v-else>
       <div class="bg-red-400">
-        <h1 class="text-center font-bold text-3xl">Dit product bevat wel: </h1>
+        <h1 class="text-center font-bold text-3xl">Dit product bevat: </h1>
         <div class="flex flex-row">
           <div class="w-5/12 mx-12">
             <ul>
@@ -219,26 +231,28 @@ export default {
           </div>
         </div>
       </div>
-      <div  class="bg-white">
-        <h1 class="text-center font-bold">Dit product bevat: </h1>
-        <div class="flex flex-row">
-          <div class="w-5/12 mx-12">
-            {{allergens}}
-          </div>
+  </div>
 
-        </div>
-      </div>
+<!--      <div  class="bg-white">-->
+<!--        <h1 class="text-center font-bold">Dit product bevat: </h1>-->
+<!--        <div class="flex flex-row">-->
+<!--          <div class="w-5/12 mx-12">-->
+<!--            {{allergens}}-->
+<!--          </div>-->
+
+<!--        </div>-->
+<!--      </div>-->
     </div>
   </div>
 
-    <div class="lg:mx-8 w-full">
+    <div class="lg:mx-8 w-full mb-12">
     <AccordionPanel :showPanel="showPanel"
       title= "Klik hier voor meer informatie over het product"
     class="font-bold text-center text-white text-3xl">
       <div class="lg:flex-row lg:flex ">
-        <div class="bg-white lg:my-4 lg:1/3 lg:p-4 rounded-xl ">
+        <div class="bg-white lg:my-4 lg:1/3 lg:p-4 rounded-xl">
           <h2 class="font-bold text-2xl">Nutri-Score: {{nutriScore}}</h2>
-          <div class="" v-if="nutriScore === 'a'">
+          <div v-if="nutriScore === 'a'">
             <img class="lg:w-96 w-64" src="/img/Nutri-score-A.svg.png" alt="Nutri-score A">
           </div>
           <div v-else-if="nutriScore === 'b'">
@@ -276,26 +290,25 @@ export default {
 
                     <h2 class="text-2xl font-bold py-4">Wat betekent nutri-score {{nutriScore}}?</h2>
                     <div v-if="nutriScore === 'a'">
-                      <p class="text-md text-gray-500 px-8">Dit product heeft een goede voedingswaarde. Het bevat meer gezonde voedingsstoffen en minder ongezonde ingrediënten.</p>
+                      <p class="text-xs text-gray-300 px-8">Dit product heeft een goede voedingswaarde. Het bevat meer gezonde voedingsstoffen en minder ongezonde ingrediënten.</p>
                     </div>
                     <div v-else-if="nutriScore === 'b'">
-                      <p class="text-md text-gray-500 px-8">Dit product is redelijk gezond, een product met A is gezonder. Er kunnen iets meer ongezonde ingrediënten in zitten.</p>
+                      <p class="text-xs text-gray-500 px-8">Dit product is redelijk gezond, een product met A is gezonder. Er kunnen iets meer ongezonde ingrediënten in zitten.</p>
                     </div>
                     <div v-else-if="nutriScore === 'c'">
-                      <p class="text-md text-gray-500 px-8">Dit product heeft een gemiddelde voedingswaarde. Het heeft gezonde en ongezonde ingrediënten.</p>
+                      <p class="text-xs text-gray-500 px-8">Dit product heeft een gemiddelde voedingswaarde. Het heeft gezonde en ongezonde ingrediënten.</p>
                     </div>
                     <div v-else-if="nutriScore === 'd'">
-                      <p class="text-md text-gray-500 px-8">Dit product is minder gezond. Er zitten meer ongezonde ingrediënten in en minder gezonde voedingsstoffen.</p>
+                      <p class="text-xs text-gray-500 px-8">Dit product is minder gezond. Er zitten meer ongezonde ingrediënten in en minder gezonde voedingsstoffen.</p>
                     </div>
                     <div v-else-if="nutriScore === 'e'">
-                      <p class="text-md text-gray-500 px-8">Dit product is minder gezond. Het bevat meer suiker, vet of zout en minder gezonde voedingsstoffen.</p>
+                      <p class="text-xs text-black px-8">Dit product is minder gezond. Het bevat meer suiker, vet of zout en minder gezonde voedingsstoffen.</p>
                     </div>
                   </div>
                   <div class="p-3 mt-2 text-center space-x-4 md:block">
                     <button
                         @click="onToggleNutri"
-                        class="mb-2 md:mb-0 bg-orange-400 px-5 py-2 text-sm shadow-sm font-medium text-white rounded-md"
-                    >
+                        class="mb-2 md:mb-0 bg-orange-400 px-5 py-2 text-sm shadow-sm font-medium text-white rounded-md">
                       Sluit
                     </button>
                   </div>
@@ -344,19 +357,19 @@ export default {
 
                       <h2 class="text-2xl font-bold py-4">Wat betekent eco-score {{ecoScore}}?</h2>
                       <div v-if="ecoScore === 'a'">
-                        <p class="text-md text-gray-500 px-8">Houdt in dat het heel goed voor je is</p>
+                        <p class="text-xs text-black px-8">Dit product is ecologisch erg goed, wat betekent dat bij het maken van dit product er weinig impact op het milieu is.</p>
                       </div>
                       <div v-else-if="ecoScore === 'b'">
-                        <p class="text-md text-gray-500 px-8">Houdt in dat het heel goed voor je is</p>
+                        <p class="text-xs text-black px-8">Dit product is ecologisch goed, wat betekent dat bij het maken van dit product er minder impact op het milieu is.</p>
                       </div>
                       <div v-else-if="ecoScore === 'c'">
-                        <p class="text-md text-gray-500 px-8">Houdt in dat het heel goed voor je is</p>
+                        <p class="text-xs text-black px-8">Dit product is ecologisch matig, wat betekent dat bij het maken van dit product er een beetje impact op het milieu is.</p>
                       </div>
                       <div v-else-if="ecoScore === 'd'">
-                        <p class="text-md text-gray-500 px-8">Houdt in dat het heel goed voor je is</p>
+                        <p class="text-xs text-black px-8">Dit product is ecologisch slecht, wat betekent dat bij het maken van dit product er veel impact op het milieu is.</p>
                       </div>
                       <div v-else-if="ecoScore === 'e'">
-                        <p class="text-md text-gray-500 px-8">Houdt in dat het heel goed voor je is</p>
+                        <p class="text-xs text-black px-8">Dit product is ecologisch erg slecht, wat betekent dat bij het maken van dit product er erg veel impact op het milieu is.</p>
                       </div>
                     </div>
                     <div class="p-3 mt-2 text-center space-x-4 md:block">
@@ -426,12 +439,8 @@ export default {
 
     </div>
     </div>
-    <button @click="toggleBarcode">
-      {{ isBarcodeInList ? 'Verwijder van favorieten' : 'Voeg toe aan favorieten' }}
-    </button>
 
 
-  <a href="/" class="btn btn-primary bg-orange-600 px-4 py-2 rounded-xl text-3xl mx-4">Terug</a>
 </template>
 
 

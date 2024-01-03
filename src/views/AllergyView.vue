@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-20 bg-white">
+  <div class="pt-2 bg-white">
     <div>
       <p class="text-center m-5 font-bold">Voedselallergieën</p>
 
