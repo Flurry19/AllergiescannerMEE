@@ -11,8 +11,6 @@ const closeModal = () => {
   emit('close');
 };
 
-
-
 export default {
   components: {AccordionPanel},
   setup (){
@@ -41,7 +39,9 @@ export default {
       proteins: '',
       ingredients: '',
       isOpenNutri:true,
-      isOpenEco:true
+      isOpenEco:true,
+      allergensArray: [],
+      nonAllergensArray: [],
     };
   },
   computed: {
@@ -53,6 +53,55 @@ export default {
     }
   },
   methods: {
+    //With this function you check if the filtered allergens match the allergens in the product
+    allergenCheck(){
+      const dataArray = this.allergens.split(',');
+      let items = localStorage.getItem("Allergy");
+      items = JSON.parse(items);
+      for (let i = 0; i < items.length; i++) {
+        const allergen = items[i];
+
+        // Check if the allergen is not present in the product's allergens
+        if (!dataArray.includes(allergen)) {
+          this.nonAllergensArray.push(allergen);
+        }
+      }
+
+      for (let i = 0; i < dataArray.length; i++) {
+        switch (dataArray[i]) {
+          case "en:milk":
+            items.forEach(item => {
+              if(item === 'en:milk' || item === 'Melk') {
+                this.allergensArray.push("Melk")
+              }
+            })
+            break;
+          case "en:nuts":
+            items.forEach(item => {
+              if(item === 'en:nuts' || item === 'Noten') {
+                this.allergensArray.push("Noten")
+              }
+            })
+            break;
+          case "en:soybeans":
+            items.forEach(item => {
+              if(item === 'en:soybeans' || item === 'Sojabonen') {
+                this.allergensArray.push("Sojabonen")
+              }
+            })
+            break;
+          case "en:egg":
+            items.forEach(item => {
+              if(item === 'en:egg' || item === 'Ei') {
+                this.allergensArray.push("Ei")
+              }
+            })
+            break;
+          default:
+            console.log("Invalid allergen");
+        }
+      }
+    },
     onToggleNutri() {
       this.isOpenNutri = !this.isOpenNutri;
     },
@@ -61,7 +110,7 @@ export default {
     }
   },
   mounted() {
-    let barcode = this.$route.params.barcode; //Here goes the number of the scanned barcode (Stijn)
+    let barcode = this.$route.params.barcode; //Here goes the number of the scanned barcode
     let url = `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`; //The API in which he places the variable above
     fetch(url)
         .then(response => {
@@ -71,10 +120,9 @@ export default {
             throw new Error('Error: ${response.status}');
           }
         })
-        //Making a variable which you call in the HTML later and
+        //Making a variable which you call in the HTML later
         .then(productInfo => {
           this.productImage = productInfo.product.image_front_url;
-
           this.productName = productInfo.product.product_name_nl;
           this.allergens = productInfo.product.allergens;
           this.nutriScore = productInfo.product.nutriscore_data.grade;
@@ -90,14 +138,16 @@ export default {
           this.fiber = productInfo.product.nutriments['fiber'];
           this.proteins = productInfo.product.nutriments['proteins'];
           this.ingredients = productInfo.product.ingredients_text_nl;
-
-
+          this.allergenCheck();
         })
         .catch(error => {
           console.error(error);
         })
+
   },
 };
+
+
 </script>
 <template>
 
@@ -114,14 +164,16 @@ export default {
         <div class="flex flex-row">
           <div class="w-5/12 mx-12">
             <ul>
-              <li class="h-12"><img class="w-12" src="/img/Fish.png" alt="Vis"></li>
-              <li class="h-12"><img class="w-12" src="/img/Pinda.png" alt="Pinda"></li>
+<!--              <li class="h-12"><img class="w-12" src="/img/Fish.png" alt="Vis"></li>-->
+<!--              <li class="h-12"><img class="w-12" src="/img/Pinda.png" alt="Pinda"></li>-->
+
             </ul>
           </div>
           <div class="w-7/12">
             <ul>
-              <li class="h-12 font-bold text-xl">Vis </li>
-              <li class="h-12 font-bold text-xl">Pinda</li>
+
+              <li class="h-12 font-bold text-xl" v-for="nonAllergenItem in nonAllergensArray"> {{nonAllergenItem}} </li>
+<!--              <li class="h-12 font-bold text-xl">Pinda</li>-->
             </ul>
           </div>
         </div>
@@ -131,27 +183,26 @@ export default {
         <div class="flex flex-row">
           <div class="w-5/12 mx-12">
             <ul>
-              <li class="h-12"><img class="w-12" src="/img/egg.png" alt="Ei"></li>
-              <li class="h-12"><img class="w-12" src="/img/gluten.png" alt="Gluten"></li>
+<!--              <li class="h-12"><img class="w-12" src="/img/egg.png" alt="Ei"></li>-->
+<!--              <li class="h-12"><img class="w-12" src="/img/gluten.png" alt="Gluten"></li>-->
             </ul>
           </div>
           <div class="w-7/12">
             <ul>
-              <li class="h-12 font-bold text-xl">Ei </li>
-              <li class="h-12 font-bold text-xl">Gluten</li>
+              <li class="h-12 font-bold text-xl" v-for="allergenItem in allergensArray"> {{allergenItem}} </li>
             </ul>
           </div>
         </div>
       </div>
-<!--      <div  class="bg-white">-->
-<!--        <h1 class="text-center font-bold">Dit product bevat: </h1>-->
-<!--        <div class="flex flex-row">-->
-<!--          <div class="w-5/12 mx-12">-->
-<!--           {{allergens}}-->
-<!--          </div>-->
+      <div  class="bg-white">
+        <h1 class="text-center font-bold">Dit product bevat: </h1>
+        <div class="flex flex-row">
+          <div class="w-5/12 mx-12">
+            {{allergens}}
+          </div>
 
-<!--        </div>-->
-<!--      </div>-->
+        </div>
+      </div>
     </div>
   </div>
 
@@ -295,7 +346,6 @@ export default {
                 </div>
               </div>
             </div>
-            <Popup/>
           </div>
         </div>
         <div class="bg-white lg:m-4 my-4 lg:mx-4 lg:w-1/3 p-4 rounded-xl">
