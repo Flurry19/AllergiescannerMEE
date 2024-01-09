@@ -1,17 +1,21 @@
 <template>
+  <div>
   <div class="pt-2 bg-white">
     <div>
       <p class="text-center m-5 font-bold">Voedselallergieën</p>
 
+      <main class="text-center mb-20">
       <!-- Lijst van voedselallergieën -->
-      <ul class="flex flex-col items-center justify-center">
-        <li v-for="(ingredient, index) in ingredients" :key="index">
-          <button class="rounded-full bg-orange-500 hover:bg-orange-700 m-2 shadow-md font-bold flex p-1 min-w-[150px] items-center justify-center" @click="toggleCheck(ingredient)">
-            {{ ingredient }}
-          </button>
-        </li>
-      </ul>
+        <ul class="flex flex-col items-center justify-center">
+          <li v-for="(ingredient, index) in ingredients" :key="index">
+            <button class="rounded-full bg-orange-500 hover:bg-orange-700 m-2 shadow-md font-bold flex p-1 min-w-[150px] items-center justify-center" @click="toggleCheck(ingredient)">
+              {{ ingredient }}
+            </button>
+          </li>
+        </ul>
+      </main>
     </div>
+  </div>
   </div>
 </template>
 
@@ -20,7 +24,27 @@ export default {
   data() {
     // De lijst van voedselallergieën
     return {
-      ingredients: ['Vis', 'Noten', 'Pinda', 'Melk', 'Ei', 'Tarwe', 'Soja', 'Sesamzaad', 'Gluten', 'Schaaldieren', 'Bessen'], // Voeg hier meer ingrediënten toe indien nodig
+      ingredients: [
+        'Aardbei',
+        'Ananas',
+        'Avocado',
+        'Bessen',
+        'Ei',
+        'Gluten',
+        'Kiwi',
+        'Maïs',
+        'Melk',
+        'Mossel',
+        'Mosterd',
+        'Noten',
+        'Pinda',
+        'Rode vruchten',
+        'Schaaldieren',
+        'Sesamzaad',
+        'Soja',
+        'Tarwe',
+        'Weekdieren',
+        'Vis',] // Voeg hier meer ingrediënten toe indien nodig
     };
   },
   methods: {
