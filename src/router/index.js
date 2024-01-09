@@ -20,7 +20,7 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/productpage',
+      path: '/productpage:barcode',
       name: 'productpage',
       component: Productpage
     },

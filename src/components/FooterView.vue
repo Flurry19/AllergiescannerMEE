@@ -1,7 +1,7 @@
 <template>
   <footer class="bg-orange-500 flex justify-around items-center h-16 fixed w-full bottom-0">
     <nav class="border-2 border-black p-2 w-full h-full flex flex-col items-center justify-center">
-      <a href="ingredientlist">
+      <router-link to="/ingredientlist">
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -22,7 +22,7 @@
           <circle cx="4" cy="22" r="1"></circle>
           <line x1="30" y1="22" x2="10" y2="22"></line>
         </svg>
-      </a>
+      </router-link>
     </nav>
 
     <nav class="border-2 border-black p-2 w-full h-full flex justify-center items-center">
@@ -47,7 +47,7 @@
     </nav>
 
     <nav class="border-2 border-black p-2 w-full h-full flex justify-center items-center">
-      <a href="productpage">
+      <router-link to="/favoritelist" >
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -61,7 +61,7 @@
         >
           <path d="M12 2L14.39 8.26L21 9.27L15.5 14.14L17.89 20L12 17.77L6.11 20L8.5 14.14L3 9.27L9.61 8.26L12 2z"></path>
         </svg>
-      </a>
+      </router-link>
     </nav>
   </footer>
 </template>
