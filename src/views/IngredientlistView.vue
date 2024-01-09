@@ -33,7 +33,7 @@
 <!--          </div>-->
 <!--        </div>-->
 
-        <h1 class="text-center mt-0 mb-8 text-3xl font-bold">Uw ingrediëntenlijst:</h1>
+        <h1 class="text-center mt-0 mb-8 text-3xl font-bold">Mijn allergieën:</h1>
 
         <main class="text-center mb-20">
           <div v-for="(item, index) in items" :key="index" class="flex items-center justify-center">
