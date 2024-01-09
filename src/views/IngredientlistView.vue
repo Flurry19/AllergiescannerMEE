@@ -11,7 +11,6 @@
             <svg v-if="item.checked" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
             </svg>
-
             <button class="rounded-l-full bg-orange-500 hover:bg-orange-700 mb-4 px-1 py-1">
 <!--            <button class="rounded-full bg-orange-500 hover:bg-orange-700 m-2 shadow-md font-bold flex p-1 min-w-[120px]">-->
               <router-link :to="{ path: '/allergy'}">
@@ -54,7 +53,7 @@
                 <line x1="9" y1="12" x2="17" y2="12"></line>
               </svg>
             </button>
-          </div>
+            </div>
         </main>
       </div>
     </div>
