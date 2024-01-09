@@ -189,25 +189,7 @@ export default {
         {{ isBarcodeInList ? 'Verwijder van favorieten' : 'Voeg toe aan favorieten' }}
       </button>
       <h1 class="text-center font-bold text-white text-5xl p-4">{{ productName }}</h1>
-<!--      <div  class="bg-green-400">-->
-<!--        <h1 class="text-center font-bold text-3xl">Dit product bevat geen:</h1>-->
-<!--        <div class="flex flex-row">-->
-<!--          <div class="w-5/12 mx-12">-->
-<!--            <ul>-->
-<!--&lt;!&ndash;              <li class="h-12"><img class="w-12" src="/img/Fish.png" alt="Vis"></li>&ndash;&gt;-->
-<!--&lt;!&ndash;              <li class="h-12"><img class="w-12" src="/img/Pinda.png" alt="Pinda"></li>&ndash;&gt;-->
 
-<!--            </ul>-->
-<!--          </div>-->
-<!--          <div class="w-7/12">-->
-<!--            <ul>-->
-
-<!--              <li class="h-12 font-bold text-xl" v-for="nonAllergenItem in nonAllergensArray"> {{nonAllergenItem}} </li>-->
-<!--&lt;!&ndash;              <li class="h-12 font-bold text-xl">Pinda</li>&ndash;&gt;-->
-<!--            </ul>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
 <div v-if="allergensArray.length === 0">
   <div class="bg-green-400 flex flex-row">
     <img class="w-1/4" src="/img/checkmark.png" alt="">

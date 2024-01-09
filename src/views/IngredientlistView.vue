@@ -1,37 +1,8 @@
 <template>
   <div class="bg-white">
     <div class="pt-10">
-<!--      <div>-->
-<!--        <p class="text-center m-5 font-bold">Zoek naar ingrediënten die voor u het belangrijkst zijn.</p>-->
-<!--        <div class="text-center m-5">-->
-<!--          <div class="flex items-center justify-center">-->
-<!--            <input type="text" v-model="searchQuery" placeholder="Zoek ingrediënten" id="searchBar" class="rounded-l-full bg-orange-500 px-2 py-1 text-white">-->
-<!--            <button class="rounded-r-full bg-orange-500 px-2 py-1" @click="searchIngredients">-->
       <div>
-<!--        <p class="text-center font-bold text-xl">Zoek naar ingrediënten die voor u het belangrijkst zijn.</p>-->
-<!--        <div class="text-center m-5">-->
-<!--          <div class="flex items-center justify-center">-->
-<!--            <input type="text"  id="searchBar" class="rounded-l-full bg-orange-500 px-2 py-1 text-white">-->
-<!--            <button class="rounded-r-full bg-orange-500 px-2 py-1">-->
-<!--              <svg-->
-<!--                  xmlns="http://www.w3.org/2000/svg"-->
-<!--                  width="24"-->
-<!--                  height="24"-->
-<!--                  viewBox="0 0 24 24"-->
-<!--                  fill="none"-->
-<!--                  stroke="black"-->
-<!--                  stroke-width="2"-->
-<!--                  stroke-linecap="round"-->
-<!--                  stroke-linejoin="round"-->
-<!--                  style="margin-right: 5px;"-->
-<!--              >-->
-<!--                <circle cx="12" cy="12" r="10"></circle>-->
-<!--                <circle cx="14" cy="10" r="5" stroke-width="1" fill="transparent"></circle>-->
-<!--                <line x1="5.25" y1="19" x2="10.25" y2="14" stroke-width="1"></line>-->
-<!--              </svg>-->
-<!--            </button>-->
-<!--          </div>-->
-<!--        </div>-->
+
 
         <h1 class="text-center mt-0 mb-8 text-3xl font-bold">Mijn allergieën:</h1>
 
@@ -95,7 +66,7 @@
     data() {
       return {
         // Een array met checkbox-items met 'checked' eigenschap
-        items: Array.from({ length: 11 }, () => ({ checked: false })),
+        items: Array.from({ length: 20 }, () => ({ checked: false })),
         // Variabele om de geselecteerde ingrediënten op te slaan
         routeQuery: [],
       };
@@ -186,58 +157,3 @@
     }
   };
 </script>
-
-<!--<script setup>-->
-<!--import { ref, onMounted, onBeforeUnmount } from 'vue';-->
-<!--import { useRoute } from 'vue-router';-->
-
-<!--const items = ref([-->
-<!--  {checked: false},-->
-<!--  {checked: false},-->
-<!--  {checked: false},-->
-<!--  {checked: false},-->
-<!--  {checked: false},-->
-<!--  {checked: false},-->
-<!--  {checked: false},-->
-<!--  {checked: false},-->
-<!--]);-->
-
-<!--const route = useRoute();-->
-
-<!--// Methode om de 'checked' status van de knop te wijzigen-->
-<!--const toggleCheck = (index) => {-->
-<!--  items.value[index].checked = !items.value[index].checked;-->
-<!--  console.log('toggle vote');-->
-<!--};-->
-
-<!--// Functie om de geselecteerde allergieën op te halen uit de query parameters-->
-<!--const getSelectedAllergies = () => {-->
-<!--  const selectedAllergies = route.query.allergies ? route.query.allergies.split(',') : [];-->
-<!--  return selectedAllergies;-->
-<!--};-->
-
-<!--// Functie om de tekst samen te stellen op basis van de geselecteerde allergieën-->
-<!--const getSelectedAllergyText = (index) => {-->
-<!--  const selectedAllergies = getSelectedAllergies();-->
-<!--  return selectedAllergies.length > index ? selectedAllergies[index] : 'Toevoegen';-->
-<!--};-->
-
-<!--onMounted(() => {-->
-<!--  const selectedAllergies = route.query.allergies ? route.query.allergies.split(',') : [];-->
-<!--  const storedAllergies = JSON.parse(localStorage.getItem('selectedAllergies')) || [];-->
-
-<!--  if (storedAllergies.length > 0) {-->
-<!--    items.value.forEach((item) => {-->
-<!--      if (selectedAllergies.includes(item)) {-->
-<!--        item.checked = true;-->
-<!--      }-->
-<!--    });-->
-<!--  }-->
-<!--});-->
-
-<!--onBeforeUnmount(() => {-->
-<!--  items.value.forEach((item) => {-->
-<!--    item.checked = false;-->
-<!--  });-->
-<!--});-->
-<!--</script>-->
