@@ -10,7 +10,7 @@
     </div>
 
     <div class="flex flex-col items-center ">
-      <button @click="toggleColors" id="toggleColorButton" class="absolute top-0 left-0 m-4 p-2">
+      <button @click="toggleColors" id="toggleColorButton" class="absolute top-0 right-0 m-4 p-6">
         <img src="/img/darkmode.png" alt="logo">
       </button>
       <button @click="toggleTextSize" class="absolute top-0 right-0 m-4 p-2">
