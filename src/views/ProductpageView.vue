@@ -144,7 +144,7 @@ export default {
         //Making a variable which you call in the HTML later
         .then(productInfo => {
           this.productImage = productInfo.product.image_front_url;
-          this.productName = productInfo.product.product_name_nl;
+          this.productName = productInfo.product.product_name;
           this.allergens = productInfo.product.allergens;
           this.nutriScore = productInfo.product.nutriscore_data.grade;
           this.ecoScore = productInfo.product.ecoscore_data.grade;
@@ -209,24 +209,22 @@ export default {
 <!--        </div>-->
 <!--      </div>-->
 <div v-if="allergensArray.length === 0">
-  <div class="bg-green-400 ">
-    <p class="h-12 font-bold text-xl">Dit product is veilig!</p>
+  <div class="bg-green-400 flex flex-row">
+    <img class="w-1/4" src="/img/checkmark.png" alt="">
+    <p class="h-12 font-bold text-4xl">Dit product is veilig!</p>
   </div>
 
 </div>
   <div v-else>
-      <div class="bg-red-400">
-        <h1 class="text-center font-bold text-3xl">Dit product bevat: </h1>
+      <div class="bg-red-400 flex flex-col">
         <div class="flex flex-row">
-          <div class="w-5/12 mx-12">
+        <img class="w-1/4" src="/img/redcross.png" alt="">
+        <h1 class="text-center font-bold text-4xl">Dit product bevat:</h1>
+        </div>
+        <div class="flex flex-row">
+          <div class="w-full">
             <ul>
-<!--              <li class="h-12"><img class="w-12" src="/img/egg.png" alt="Ei"></li>-->
-<!--              <li class="h-12"><img class="w-12" src="/img/gluten.png" alt="Gluten"></li>-->
-            </ul>
-          </div>
-          <div class="w-7/12">
-            <ul>
-              <li class="h-12 font-bold text-xl" v-for="allergenItem in allergensArray"> {{allergenItem}} </li>
+              <li class="h-12 font-bold text-3xl" v-for="allergenItem in allergensArray"> {{allergenItem}} </li>
             </ul>
           </div>
         </div>
@@ -281,13 +279,9 @@ export default {
               <div
                   @click="onToggleNutri"
               ></div>
-              <div
-                  class="w-full max-w-lg relative mx-auto my-auto rounded-xl shadow-lg bg-white"
-              >
+              <div class="w-full max-w-lg relative mx-auto my-auto rounded-xl shadow-lg bg-white">
                 <div>
                   <div class="text-center flex-auto justify-center">
-
-
                     <h2 class="text-2xl font-bold py-4">Wat betekent nutri-score {{nutriScore}}?</h2>
                     <div v-if="nutriScore === 'a'">
                       <p class="text-xs text-gray-300 px-8">Dit product heeft een goede voedingswaarde. Het bevat meer gezonde voedingsstoffen en minder ongezonde ingrediënten.</p>
