@@ -13,5 +13,41 @@
     </div>
   </header>
 </template>
-<script setup>
+<script>
+import FavoriteCard from "@/components/FavoriteCard.vue";
+
+export default {
+  components: { FavoriteCard },
+  data() {
+    return {
+      isHovered: null,
+      isOrange: true,
+      isTextEnlarged: false,
+      products: [],
+    };
+  },
+  methods: {
+    toggleColors() {
+      this.isOrange = !this.isOrange;
+      // Add or remove bg-orange-500 class from specific elements as needed
+      const elementsToToggle = document.querySelectorAll('.bg-orange-500');
+      elementsToToggle.forEach(element => {
+        element.classList.toggle('bg-gray-500', !this.isOrange);
+        element.classList.toggle('bg-orange-500', this.isOrange);
+      });
+    },
+    toggleTextSize() {
+      this.isTextEnlarged = !this.isTextEnlarged;
+    },
+    hoverEffect(index) {
+      this.isHovered = index;
+    },
+    resetHoverEffect() {
+      this.isHovered = null;
+    },
+    selectProduct(index) {
+      // Handle product selection using the index
+    },
+  },
+};
 </script>
