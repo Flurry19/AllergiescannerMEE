@@ -1,42 +1,44 @@
 <template>
   <div class="bg-white">
-  <div>
-    <!-- Logo boven in het midden -->
-    <div class="flex justify-center items-center my-5">
-      <!-- <img src="/img/MEE-23-11-2023.png" alt="Logo" class="h-26 w-26">-->
-    </div>
+    <div>
+      <!-- Logo boven in het midden -->
+      <div class="flex justify-center items-center my-5">
+        <!-- <img src="/img/MEE-23-11-2023.png" alt="Logo" class="h-26 w-26">-->
+      </div>
 
-    <div class="mt-5 mb-5">
-      <p class="text-center text-3xl font-bold" :class="{ 'enlarged-text': isTextEnlarged }">Hier vindt u de producten die u in het verleden heeft gescand</p>
-    </div>
+      <div class="mt-5 mb-5">
+        <p class="text-center text-3xl font-bold" :class="{ 'enlarged-text': isTextEnlarged }">Hier vindt u de producten die u in het verleden heeft gescand</p>
+      </div>
 
-    <div class="flex flex-col items-center ">
-      <button @click="toggleColors" id="toggleColorButton" class="absolute top-0 right-0 m-4 p-6">
-        <img src="/img/darkmode.png" alt="logo">
-      </button>
-      <button @click="toggleTextSize" class="absolute top-0 right-0 m-4 p-2">
-        Vergroot tekst
-      </button>
-      <router-link to="/scanner" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full mb-5">Begin met scannen</router-link>
-    </div>
+      <div class="flex flex-col items-center ">
+        <button @click="toggleColors" id="toggleColorButton" class="absolute top-0 right-11 m-4 p-0">
+          <img src="/img/darkmode.png" alt="logo">
+        </button>
+        <button @click="toggleTextSize" class="absolute top-0 right-0 m-5 p-0">
+          <img src="/img/3548527-200.png" alt="logo" class="h-10 w-10"> <!-- Adjust the h-6 and w-6 for your desired size -->
+        </button>
+        <router-link to="/scanner" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full mb-5">Begin met scannen</router-link>
+        <!-- Delete History Button -->
+        <button @click="deleteHistory" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mb-5">
+          Verwijder geschiedenis
+        </button>
+      </div>
 
-    <div class="my-5">
-      <p class="text-center text-5xl font-bold">Uw gescande producten:</p>
+      <div class="my-5">
+        <p class="text-center text-5xl font-bold">Uw gescande producten:</p>
+      </div>
+      <div class="bg-orange-500 mb-10 p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+        <favorite-card v-for="product in products" :barcode="product.barcode" :productImage="product.productImage" :productName="product.productName" :key="product.barcode" :product="product" :class="{ 'bg-orange-500': isOrange, 'bg-gray-200': !isOrange }" />
+      </div>
     </div>
-    <div class="bg-orange-500 mb-10 p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-    <favorite-card v-for="product in products" :barcode="product.barcode" :productImage="product.productImage" :productName="product.productName" :key="product.barcode" :product="product" />
   </div>
-  </div>
-  </div>
-
 </template>
 
 <script>
-import HistoryCard from "@/components/HistoryCard.vue";
 import FavoriteCard from "@/components/FavoriteCard.vue";
 
 export default {
-  components: {FavoriteCard},
+  components: { FavoriteCard },
   data() {
     return {
       isHovered: null,
@@ -48,6 +50,12 @@ export default {
   methods: {
     toggleColors() {
       this.isOrange = !this.isOrange;
+      // Add or remove bg-orange-500 class from specific elements as needed
+      const elementsToToggle = document.querySelectorAll('.bg-orange-500');
+      elementsToToggle.forEach(element => {
+        element.classList.toggle('bg-gray-500', !this.isOrange);
+        element.classList.toggle('bg-orange-500', this.isOrange);
+      });
     },
     toggleTextSize() {
       this.isTextEnlarged = !this.isTextEnlarged;
@@ -64,7 +72,6 @@ export default {
     getProductInfo() {
       const favoriteBarcodes = JSON.parse(localStorage.getItem('favoriteBarcodes')) || [];
 
-      // Fetch details for all favorite barcodes from the API
       favoriteBarcodes.forEach(barcode => {
         let url = `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`;
 
@@ -77,7 +84,6 @@ export default {
               }
             })
             .then(productInfo => {
-              // Update the favoriteProducts array with fetched information
               this.products.push({
                 barcode: barcode,
                 productName: productInfo.product.product_name_nl,
@@ -91,13 +97,18 @@ export default {
             });
       });
     },
+    deleteHistory() {
+      this.products = [];
+      localStorage.removeItem('favoriteBarcodes');
+      console.log('History deleted');
+    },
   },
   created() {
-    // Call the method to fetch product information when the component is created
     this.getProductInfo();
   },
 };
 </script>
+
 <style>
 .product-card {
   transition: border-color 0.3s ease, z-index 0.3s ease;
