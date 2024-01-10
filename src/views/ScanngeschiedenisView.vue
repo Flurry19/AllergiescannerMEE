@@ -1,8 +1,9 @@
 <template>
+  <div class="bg-white">
   <div>
     <!-- Logo boven in het midden -->
     <div class="flex justify-center items-center my-5">
-<!--      <img src="/img/MEE-23-11-2023.png" alt="Logo" class="h-26 w-26">-->
+      <!-- <img src="/img/MEE-23-11-2023.png" alt="Logo" class="h-26 w-26">-->
     </div>
 
     <div class="mt-5 mb-5">
@@ -20,168 +21,28 @@
     </div>
 
     <div class="my-5">
-      <p class="text-center text-5xl font-bold" >Uw gescande producten:</p>
+      <p class="text-center text-5xl font-bold">Uw gescande producten:</p>
     </div>
-
-    <div :class="{ 'bg-orange-500': isOrange, 'bg-gray-500': !isOrange }">
-      <div class="p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
-        <!-- Product 1 -->
-        <div @mouseover="hoverEffect(1)" @mouseout="resetHoverEffect" @click="selectProduct" class="product-card bg-white rounded overflow-hidden shadow-lg" :class="{ 'border-orange-700': isHovered === 1 && isOrange, 'border-gray-500': isHovered === 1 && !isOrange, 'z-10': isHovered === 1 }">
-          <img class="w-full" src="/img/egg.png" alt="product01">
-          <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2" :class="{ 'enlarged-text': isTextEnlarged }">Egg</div>
-            <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">
-              Ingedientenlijst:
-
-              Allergie:
-
-              Nutri-score:
-
-              Voedingsvoorwaarden:
-
-              Calorienverdeling:
-            </p>
-          </div>
-          <div class="px-6 pt-4 pb-2">
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#</span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#</span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#</span>
-          </div>
-        </div>
-
-        <!-- Product 2 -->
-        <div @mouseover="hoverEffect(2)" @mouseout="resetHoverEffect" @click="selectProduct" class="product-card bg-white rounded overflow-hidden shadow-lg" :class="{ 'border-orange-700': isHovered === 1 && isOrange, 'border-gray-500': isHovered === 1 && !isOrange, 'z-10': isHovered === 1 }">
-          <img class="w-full" src="/img/Fish.png" alt="product01">
-          <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2" :class="{ 'enlarged-text': isTextEnlarged }">Fish</div>
-            <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">
-           Ingedientenlijst:
-
-              Allergie:
-
-              Nutri-score:
-
-              Voedingsvoorwaarden:
-
-              Calorienverdeling:
-            </p>
-          </div>
-          <div class="px-6 pt-4 pb-2">
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#</span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#</span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#</span>
-          </div>
-        </div>
-
-        <!-- Product 3 -->
-        <div @mouseover="hoverEffect(3)" @mouseout="resetHoverEffect" @click="selectProduct" class="product-card bg-white rounded overflow-hidden shadow-lg" :class="{ 'border-orange-700': isHovered === 1 && isOrange, 'border-gray-500': isHovered === 1 && !isOrange, 'z-10': isHovered === 1 }">
-          <img class="w-full" src="/img/gluten.png" alt="product01">
-          <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2" :class="{ 'enlarged-text': isTextEnlarged }">Gluten</div>
-            <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">
-              Ingedientenlijst:
-
-              Allergie:
-
-              Nutri-score:
-
-              Voedingsvoorwaarden:
-
-              Calorienverdeling:
-            </p>
-          </div>
-          <div class="px-6 pt-4 pb-2">
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#</span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#</span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#</span>
-          </div>
-        </div>
-
-        <!-- Product 4 -->
-        <div @mouseover="hoverEffect(4)" @mouseout="resetHoverEffect" @click="selectProduct" class="product-card bg-white rounded overflow-hidden shadow-lg" :class="{ 'border-orange-700': isHovered === 1 && isOrange, 'border-gray-500': isHovered === 1 && !isOrange, 'z-10': isHovered === 1 }">
-          <img class="w-full" src="/img/Pinda.png" alt="product01">
-          <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2" :class="{ 'enlarged-text': isTextEnlarged }">Pinda</div>
-            <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">
-              Ingedientenlijst:
-
-              Allergie:
-
-              Nutri-score:
-
-              Voedingsvoorwaarden:
-
-              Calorienverdeling:
-            </p>
-          </div>
-          <div class="px-6 pt-4 pb-2">
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#</span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#</span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#</span>
-          </div>
-        </div>
-
-        <!-- Product 5 -->
-        <div @mouseover="hoverEffect(5)" @mouseout="resetHoverEffect" @click="selectProduct" class="product-card bg-white rounded overflow-hidden shadow-lg" :class="{ 'border-orange-700': isHovered === 1 && isOrange, 'border-gray-500': isHovered === 1 && !isOrange, 'z-10': isHovered === 1 }">
-          <img class="w-full" src="/img/kellogscornflakes.png" alt="product01">
-          <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2" :class="{ 'enlarged-text': isTextEnlarged }">Kellogs</div>
-            <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">
-              Ingedientenlijst:
-
-              Allergie:
-
-              Nutri-score:
-
-              Voedingsvoorwaarden:
-
-              Calorienverdeling:
-            </p>
-          </div>
-          <div class="px-6 pt-4 pb-2">
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#</span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#</span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#</span>
-          </div>
-        </div>
-
-        <!-- Product 6 -->
-        <div @mouseover="hoverEffect(6)" @mouseout="resetHoverEffect" @click="selectProduct" class="product-card bg-white rounded overflow-hidden shadow-lg" :class="{ 'border-orange-700': isHovered === 1 && isOrange, 'border-gray-500': isHovered === 1 && !isOrange, 'z-10': isHovered === 1 }">
-          <img class="w-full" src="/img/Broccoli.png" alt="product01">
-          <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2" :class="{ 'enlarged-text': isTextEnlarged }">Brocolli</div>
-            <p class="text-gray-700 text-base" :class="{ 'enlarged-text': isTextEnlarged }">
-              Ingedientenlijst:
-
-              Allergie:
-
-              Nutri-score:
-
-              Voedingsvoorwaarden:
-
-              Calorienverdeling:
-            </p>
-          </div>
-          <div class="px-6 pt-4 pb-2">
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#</span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#</span>
-            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#</span>
-          </div>
-        </div>
-
-
-      </div>
-    </div>
+    <div class="bg-orange-500 mb-10 p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+    <favorite-card v-for="product in products" :barcode="product.barcode" :productImage="product.productImage" :productName="product.productName" :key="product.barcode" :product="product" />
   </div>
+  </div>
+  </div>
+
 </template>
 
 <script>
+import HistoryCard from "@/components/HistoryCard.vue";
+import FavoriteCard from "@/components/FavoriteCard.vue";
+
 export default {
+  components: {FavoriteCard},
   data() {
     return {
       isHovered: null,
       isOrange: true,
       isTextEnlarged: false,
+      products: [],
     };
   },
   methods: {
@@ -197,13 +58,46 @@ export default {
     resetHoverEffect() {
       this.isHovered = null;
     },
-    selectProduct() {
-      // Voeg hier de logica toe voor het selecteren van een product
+    selectProduct(index) {
+      // Handle product selection using the index
     },
+    getProductInfo() {
+      const favoriteBarcodes = JSON.parse(localStorage.getItem('favoriteBarcodes')) || [];
+
+      // Fetch details for all favorite barcodes from the API
+      favoriteBarcodes.forEach(barcode => {
+        let url = `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`;
+
+        fetch(url)
+            .then(response => {
+              if (response.ok) {
+                return response.json();
+              } else {
+                throw new Error(`Error: ${response.status}`);
+              }
+            })
+            .then(productInfo => {
+              // Update the favoriteProducts array with fetched information
+              this.products.push({
+                barcode: barcode,
+                productName: productInfo.product.product_name_nl,
+                productImage: productInfo.product.image_front_url,
+              });
+
+              console.log('information for a card is retrieved')
+            })
+            .catch(error => {
+              console.error(error);
+            });
+      });
+    },
+  },
+  created() {
+    // Call the method to fetch product information when the component is created
+    this.getProductInfo();
   },
 };
 </script>
-
 <style>
 .product-card {
   transition: border-color 0.3s ease, z-index 0.3s ease;
