@@ -3,14 +3,11 @@
     <div>
       <p class="text-center text-4xl p-3 font-bold">Mijn favoriete producten:</p>
     </div>
-
-    <div class="bg-orange-500 mb-10 p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-10">
       <!-- Use v-for to dynamically create FavoriteCard components -->
-      <div class="mt-10 mb-10 transition hover:-translate-y-1 hover:scale-110 duration-500 bg-white rounded overflow-hidden shadow-lg ring-1 ring-slate-900/5 hover:bg-orange-700 hover:ring-orange-700 justify-center">
+      <div class="bg-orange-500 mb-10 p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
         <FavoriteCard v-for="product in favoriteProducts" :barcode="product.barcode" :productImage="product.productImage" :productName="product.productName" :key="product.barcode" :product="product" />
         </div>
       </div>
-  </div>
 </template>
 
 <script>
