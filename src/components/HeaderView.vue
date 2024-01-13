@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-orange-500 flex justify-between items-center py-2 px-4 h-16 fixed w-full top-0">
+  <header class="bg-orange-500 flex justify-between items-center py-2 px-4 h-16 fixed w-full top-0" :class="{ 'bg-orange-500': isOrange, 'bg-gray-500': !isOrange }">
     <div>
       <img src="/img/Logo.png" alt="Site Logo">
     </div>
@@ -11,6 +11,15 @@
 <!--        <img src="instructions-icon.png" alt="Instructions Icon">-->
 <!--      </button>-->
     </div>
+    <div class="flex flex-col items-center ">
+      <button @click="toggleColors" id="toggleColorButton" class="absolute top-0 right-11 m-4 p-0">
+        <img src="/img/darkmode.png" alt="logo">
+      </button>
+      <button @click="toggleTextSize" class="absolute top-0 right-0 m-5 p-0">
+        <img src="/img/3548527-200.png" alt="logo" class="h-10 w-10"> <!-- Adjust the h-6 and w-6 for your desired size -->
+      </button>
+    </div>
+
   </header>
 </template>
 <script>

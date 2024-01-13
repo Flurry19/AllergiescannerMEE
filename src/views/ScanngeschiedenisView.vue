@@ -10,6 +10,7 @@
         <p class="text-center text-3xl font-bold" :class="{ 'enlarged-text': isTextEnlarged }">Hier vindt u de producten die u in het verleden heeft gescand</p>
       </div>
 
+
       <div class="flex flex-col items-center ">
         <button @click="toggleColors" id="toggleColorButton" class="absolute top-0 right-11 m-4 p-0">
           <img src="/img/darkmode.png" alt="logo">
@@ -24,55 +25,54 @@
         </button>
       </div>
 
-      <div class="my-5">
+      <div class="my-5" >
         <p class="text-center text-5xl font-bold">Uw gescande producten:</p>
       </div>
+
       <div class="bg-orange-500 mb-10 p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-        <favorite-card v-for="product in products" :barcode="product.barcode" :productImage="product.productImage" :productName="product.productName" :key="product.barcode" :product="product" :class="{ 'bg-orange-500': isOrange, 'bg-gray-200': !isOrange }" />
+        <!-- Use v-for to dynamically create FavoriteCard components -->
+        <div class="group transition hover:-translate-y-1 hover:scale-110 duration-500 bg-white rounded overflow-hidden shadow-lg ring-1 ring-slate-900/5 hover:bg-orange-700 hover:ring-orange-700 justify-center">
+        <router-link
+            v-for="product in scannedProducts"
+            :to="{ name: 'productpage', params: { barcode: product.barcode } }"
+            :key="product.barcode"
+            class="cursor-pointer"
+        >
+          <HistoryCard
+              :barcode="product.barcode"
+              :productImage="product.productImage"
+              :productName="product.productName"
+              :product="product"
+          />
+        </router-link>
+    </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import FavoriteCard from "@/components/FavoriteCard.vue";
+import HistoryCard from "@/components/HistoryCard.vue";
 
 export default {
-  components: { FavoriteCard },
+  components: { HistoryCard },
   data() {
     return {
-      isHovered: null,
-      isOrange: true,
-      isTextEnlarged: false,
-      products: [],
+      scannedProducts: [],
     };
   },
   methods: {
-    toggleColors() {
-      this.isOrange = !this.isOrange;
-      // Add or remove bg-orange-500 class from specific elements as needed
-      const elementsToToggle = document.querySelectorAll('.bg-orange-500');
-      elementsToToggle.forEach(element => {
-        element.classList.toggle('bg-gray-500', !this.isOrange);
-        element.classList.toggle('bg-orange-500', this.isOrange);
-      });
+    deleteHistory() {
+      // Verwijder de geschiedenis uit de local storage en leeg de scannedProducts-array
+      localStorage.removeItem('scannedBarcodes');
+      this.scannedProducts = [];
+      console.log('Geschiedenis verwijderd');
     },
-    toggleTextSize() {
-      this.isTextEnlarged = !this.isTextEnlarged;
-    },
-    hoverEffect(index) {
-      this.isHovered = index;
-    },
-    resetHoverEffect() {
-      this.isHovered = null;
-    },
-    selectProduct(index) {
-      // Handle product selection using the index
-    },
-    getProductInfo() {
-      const favoriteBarcodes = JSON.parse(localStorage.getItem('favoriteBarcodes')) || [];
+    loadScannedProducts() {
+      const scannedBarcodes = JSON.parse(localStorage.getItem('scannedBarcodes')) || [];
 
-      favoriteBarcodes.forEach(barcode => {
+      // Fetch details for all scanned barcodes from the API
+      scannedBarcodes.forEach(barcode => {
         let url = `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`;
 
         fetch(url)
@@ -84,27 +84,22 @@ export default {
               }
             })
             .then(productInfo => {
-              this.products.push({
+              // Update the scannedProducts array with fetched information
+              this.scannedProducts.push({
                 barcode: barcode,
                 productName: productInfo.product.product_name_nl,
                 productImage: productInfo.product.image_front_url,
               });
-
-              console.log('information for a card is retrieved')
+              console.log('Information for a card is retrieved');
             })
             .catch(error => {
               console.error(error);
             });
       });
     },
-    deleteHistory() {
-      this.products = [];
-      localStorage.removeItem('favoriteBarcodes');
-      console.log('History deleted');
-    },
   },
-  created() {
-    this.getProductInfo();
+  mounted() {
+    this.loadScannedProducts();
   },
 };
 </script>
@@ -120,12 +115,6 @@ export default {
 }
 .product-card:hover {
   border: 4px solid #ff6d00; /* Gebruik een grijze kleur bij hover */
-}
-.bg-orange-500 .product-card:hover {
-  border: 4px solid #7d7d7d; /* Gebruik een oranje kleur bij hover als de achtergrond oranje is */
-}
-.bg-gray-200 .product-card:hover {
-  border: 4px solid #ff6d00; /* Gebruik een oranje kleur bij hover als de achtergrond oranje is */
 }
 
 /* Voeg deze stijl toe voor vergroten van tekst */

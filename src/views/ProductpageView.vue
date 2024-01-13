@@ -12,14 +12,13 @@ const closeModal = () => {
 };
 
 export default {
-  components: {AccordionPanel},
-  setup (){
+  components: { AccordionPanel },
+  setup() {
     const showPanel = ref(false);
-    return{
+    return {
       showPanel,
-    }
+    };
   },
-
   data() {
     return {
       productName: '',
@@ -38,36 +37,34 @@ export default {
       fiber: '',
       proteins: '',
       ingredients: '',
-      isOpenNutri:true,
-      isOpenEco:true,
+      isOpenNutri: true,
+      isOpenEco: true,
       barcode: '',
       favoriteBarcodes: [],
       allergensArray: [],
-      nonAllergensArray: []
-
+      nonAllergensArray: [],
+      scannedProducts: [],
     };
   },
   computed: {
-    isModalEcoVisible(){
+    isModalEcoVisible() {
       return !this.isOpenEco;
     },
-    isModalNutriVisible(){
+    isModalNutriVisible() {
       return !this.isOpenNutri;
     },
     isBarcodeInList() {
       return this.favoriteBarcodes.includes(this.barcode);
-    }
+    },
   },
   methods: {
-    //With this function you check if the filtered allergens match the allergens in the product
-    allergenCheck(){
+    allergenCheck() {
       const dataArray = this.allergens.split(',');
-      let items = localStorage.getItem("Ingredient");
+      let items = localStorage.getItem('Ingredient');
       items = JSON.parse(items);
       for (let i = 0; i < items.length; i++) {
         const allergen = items[i];
 
-        // Check if the allergen is not present in the product's allergens
         if (!dataArray.includes(allergen)) {
           this.nonAllergensArray.push(allergen);
         }
@@ -75,36 +72,36 @@ export default {
 
       for (let i = 0; i < dataArray.length; i++) {
         switch (dataArray[i]) {
-          case "en:milk":
-            items.forEach(item => {
-              if(item === 'en:milk' || item === 'Melk') {
-                this.allergensArray.push("Melk")
+          case 'en:milk':
+            items.forEach((item) => {
+              if (item === 'en:milk' || item === 'Melk') {
+                this.allergensArray.push('Melk');
               }
-            })
+            });
             break;
-          case "en:nuts":
-            items.forEach(item => {
-              if(item === 'en:nuts' || item === 'Noten') {
-                this.allergensArray.push("Noten")
+          case 'en:nuts':
+            items.forEach((item) => {
+              if (item === 'en:nuts' || item === 'Noten') {
+                this.allergensArray.push('Noten');
               }
-            })
+            });
             break;
-          case "en:soybeans":
-            items.forEach(item => {
-              if(item === 'en:soybeans' || item === 'Sojabonen') {
-                this.allergensArray.push("Sojabonen")
+          case 'en:soybeans':
+            items.forEach((item) => {
+              if (item === 'en:soybeans' || item === 'Sojabonen') {
+                this.allergensArray.push('Sojabonen');
               }
-            })
+            });
             break;
-          case "en:egg":
-            items.forEach(item => {
-              if(item === 'en:egg' || item === 'Ei') {
-                this.allergensArray.push("Ei")
+          case 'en:egg':
+            items.forEach((item) => {
+              if (item === 'en:egg' || item === 'Ei') {
+                this.allergensArray.push('Ei');
               }
-            })
+            });
             break;
           default:
-            console.log("Invalid allergen");
+            console.log('Invalid allergen');
         }
       }
     },
@@ -114,35 +111,31 @@ export default {
     onToggleEco() {
       this.isOpenEco = !this.isOpenEco;
     },
-
     toggleBarcode() {
-      // Toggle the barcode in the array
       if (this.isBarcodeInList) {
-        this.favoriteBarcodes = this.favoriteBarcodes.filter(b => b !== this.barcode);
-      } else {
+        this.favoriteBarcodes = this.favoriteBarcodes.filter((b) => b !== this.barcode);
+      }
+      else {
         this.favoriteBarcodes.push(this.barcode);
       }
-
-      // Save the updated array back to local storage
       localStorage.setItem('favoriteBarcodes', JSON.stringify(this.favoriteBarcodes));
-    }
+    },
   },
   mounted() {
-    this.barcode = this.$route.params.barcode; //Here goes the number of the scanned barcode (Stijn)
+    this.barcode = this.$route.params.barcode;
     this.favoriteBarcodes = JSON.parse(localStorage.getItem('favoriteBarcodes')) || [];
-    let barcode = this.barcode
+    let barcode = this.barcode;
 
-    let url = `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`; //The API in which he places the variable above
+    let url = `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`;
     fetch(url)
-        .then(response => {
+        .then((response) => {
           if (response.ok) {
             return response.json();
           } else {
-            throw new Error('Error: ${response.status}');
+            throw new Error(`Error: ${response.status}`);
           }
         })
-        //Making a variable which you call in the HTML later
-        .then(productInfo => {
+        .then((productInfo) => {
           this.productImage = productInfo.product.image_front_url;
           this.productName = productInfo.product.product_name;
           this.allergens = productInfo.product.allergens;
@@ -160,149 +153,167 @@ export default {
           this.proteins = productInfo.product.nutriments['proteins'];
           this.ingredients = productInfo.product.ingredients_text_nl;
 
-
-          this.$emit('productDataChanged', { barcode: this.barcode, productName: this.productName, productImage: this.productImage });
+          this.$emit('productDataChanged', {
+            barcode: this.barcode,
+            productName: this.productName,
+            productImage: this.productImage,
+          });
 
           this.allergenCheck();
 
-        })
-        .catch(error => {
-          console.error(error);
-        })
+          // Voeg gescande product toe aan de scannedProducts array
+          const scannedProduct = {
+            barcode: this.barcode,
+            productName: this.productName,
+            productImage: this.productImage,
+            // voeg andere relevante informatie toe zoals allergens, nutriScore, etc.
+          };
+          // Update the scannedProducts array immediately
+          this.scannedProducts.push(scannedProduct);
 
+          // Sla de updated array terug op in de local storage
+          localStorage.setItem('scannedProducts', JSON.stringify(this.scannedProducts));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
   },
 };
-
 </script>
 <template>
 
   <div class="bg-orange-400 lg:mx-12" id="productInfo">
 
-  <div class="flex lg:flex-row flex-col">
-   <div class="lg:w-5/12 flex justify-center items-center">
-     <img :src="productImage" alt="Product Image">
+    <div class="flex lg:flex-row flex-col">
+      <div class="lg:w-5/12 flex justify-center items-center">
+        <img :src="productImage" alt="Product Image">
 
-   </div>
+      </div>
 
-    <div class="lg:w-7/12">
-      <button class="text-xl font-bold bg-orange-600 rounded-xl p-2" @click="toggleBarcode">
-        {{ isBarcodeInList ? 'Verwijder van favorieten' : 'Voeg toe aan favorieten' }}
-      </button>
-      <h1 class="text-center font-bold text-white text-5xl p-4">{{ productName }}</h1>
-<!--      <div  class="bg-green-400">-->
-<!--        <h1 class="text-center font-bold text-3xl">Dit product bevat geen:</h1>-->
-<!--        <div class="flex flex-row">-->
-<!--          <div class="w-5/12 mx-12">-->
-<!--            <ul>-->
-<!--&lt;!&ndash;              <li class="h-12"><img class="w-12" src="/img/Fish.png" alt="Vis"></li>&ndash;&gt;-->
-<!--&lt;!&ndash;              <li class="h-12"><img class="w-12" src="/img/Pinda.png" alt="Pinda"></li>&ndash;&gt;-->
+      <div class="lg:w-7/12">
+        <button class="text-xl font-bold bg-orange-600 rounded-xl p-2" @click="toggleBarcode">
+          {{ isBarcodeInList ? 'Verwijder van favorieten' : 'Voeg toe aan favorieten' }}
+        </button>
+        <h1 class="text-center font-bold text-white text-5xl p-4">{{ productName }}</h1>
+        <!--      <div  class="bg-green-400">-->
+        <!--        <h1 class="text-center font-bold text-3xl">Dit product bevat geen:</h1>-->
+        <!--        <div class="flex flex-row">-->
+        <!--          <div class="w-5/12 mx-12">-->
+        <!--            <ul>-->
+        <!--&lt;!&ndash;              <li class="h-12"><img class="w-12" src="/img/Fish.png" alt="Vis"></li>&ndash;&gt;-->
+        <!--&lt;!&ndash;              <li class="h-12"><img class="w-12" src="/img/Pinda.png" alt="Pinda"></li>&ndash;&gt;-->
 
-<!--            </ul>-->
-<!--          </div>-->
-<!--          <div class="w-7/12">-->
-<!--            <ul>-->
+        <!--            </ul>-->
+        <!--          </div>-->
+        <!--          <div class="w-7/12">-->
+        <!--            <ul>-->
 
-<!--              <li class="h-12 font-bold text-xl" v-for="nonAllergenItem in nonAllergensArray"> {{nonAllergenItem}} </li>-->
-<!--&lt;!&ndash;              <li class="h-12 font-bold text-xl">Pinda</li>&ndash;&gt;-->
-<!--            </ul>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<div v-if="allergensArray.length === 0">
-  <div class="bg-green-400 flex flex-row">
-    <img class="w-1/4" src="/img/checkmark.png" alt="">
-    <p class="h-12 font-bold text-4xl">Dit product is veilig!</p>
-  </div>
+        <!--              <li class="h-12 font-bold text-xl" v-for="nonAllergenItem in nonAllergensArray"> {{nonAllergenItem}} </li>-->
+        <!--&lt;!&ndash;              <li class="h-12 font-bold text-xl">Pinda</li>&ndash;&gt;-->
+        <!--            </ul>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--      </div>-->
+        <div v-if="allergensArray.length === 0">
+          <div class="bg-green-400 flex flex-row">
+            <img class="w-1/4" src="/img/checkmark.png" alt="">
+            <p class="h-12 font-bold text-4xl">Dit product is veilig!</p>
+          </div>
 
-</div>
-  <div v-else>
-      <div class="bg-red-400 flex flex-col">
-        <div class="flex flex-row">
-        <img class="w-1/4" src="/img/redcross.png" alt="">
-        <h1 class="text-center font-bold text-4xl">Dit product bevat:</h1>
         </div>
-        <div class="flex flex-row">
-          <div class="w-full">
-            <ul>
-              <li class="h-12 font-bold text-3xl" v-for="allergenItem in allergensArray"> {{allergenItem}} </li>
-            </ul>
+        <div v-else>
+          <div class="bg-red-400 flex flex-col">
+            <div class="flex flex-row">
+              <img class="w-1/4" src="/img/redcross.png" alt="">
+              <h1 class="text-center font-bold text-4xl">Dit product bevat:</h1>
+            </div>
+            <div class="flex flex-row">
+              <div class="w-full">
+                <ul>
+                  <li class="h-12 font-bold text-3xl" v-for="allergenItem in allergensArray"> {{ allergenItem }}</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
+
+        <!--      <div  class="bg-white">-->
+        <!--        <h1 class="text-center font-bold">Dit product bevat: </h1>-->
+        <!--        <div class="flex flex-row">-->
+        <!--          <div class="w-5/12 mx-12">-->
+        <!--            {{allergens}}-->
+        <!--          </div>-->
+
+        <!--        </div>-->
+        <!--      </div>-->
       </div>
-  </div>
-
-<!--      <div  class="bg-white">-->
-<!--        <h1 class="text-center font-bold">Dit product bevat: </h1>-->
-<!--        <div class="flex flex-row">-->
-<!--          <div class="w-5/12 mx-12">-->
-<!--            {{allergens}}-->
-<!--          </div>-->
-
-<!--        </div>-->
-<!--      </div>-->
     </div>
-  </div>
 
     <div class="lg:mx-8 w-full mb-12">
-    <AccordionPanel :showPanel="showPanel"
-      title= "Klik hier voor meer informatie over het product"
-    class="font-bold text-center text-white text-3xl">
-      <div class="lg:flex-row lg:flex ">
-        <div class="bg-white lg:my-4 lg:1/3 lg:p-4 rounded-xl">
-          <h2 class="font-bold text-2xl">Nutri-Score: {{nutriScore}}</h2>
-          <div v-if="nutriScore === 'a'">
-            <img class="lg:w-96 w-64" src="/img/Nutri-score-A.svg.png" alt="Nutri-score A">
-          </div>
-          <div v-else-if="nutriScore === 'b'">
-            <img class="lg:w-96 w-64" src="/img/Nutri-score-B.svg.png" alt="Nutri-score B">
-          </div>
-          <div v-else-if="nutriScore === 'c'">
-            <img class="lg:w-96 w-64" src="/img/2560px-Nutri-score-C.svg.png" alt="Nutri-score C">
-          </div>
-          <div v-else-if="nutriScore === 'd'">
-            <img class="lg:w-96 w-64" src="/img/2560px-Nutri-score-D.svg.png" alt="Nutri-score D">
-          </div>
-          <div v-else-if="nutriScore === 'e'">
-            <img class="lg:w-96 w-64" src="/img/2560px-Nutri-score-E.svg.png" alt="Nutri-score E">
-          </div>
-
-          <div id="app">
-            <div class="flex flex-col items-center justify-center p-2 ">
-              <button
-                  @click="onToggleNutri"
-                  class="bg-orange-400 px-5 py-2 text-sm shadow-sm font-medium text-white rounded-md"
-              >
-                Wat betekent dit?
-              </button>
+      <AccordionPanel :showPanel="showPanel"
+                      title="Klik hier voor meer informatie over het product"
+                      class="font-bold text-center text-white text-3xl">
+        <div class="lg:flex-row lg:flex ">
+          <div class="bg-white lg:my-4 lg:1/3 lg:p-4 rounded-xl">
+            <h2 class="font-bold text-2xl">Nutri-Score: {{ nutriScore }}</h2>
+            <div v-if="nutriScore === 'a'">
+              <img class="lg:w-96 w-64" src="/img/Nutri-score-A.svg.png" alt="Nutri-score A">
             </div>
-            <div v-if="isModalNutriVisible">
-              <div
-                  @click="onToggleNutri"
-              ></div>
-              <div class="w-full max-w-lg relative mx-auto my-auto rounded-xl shadow-lg bg-white">
-                <div>
-                  <div class="text-center flex-auto justify-center">
-                    <h2 class="text-2xl font-bold py-4">Wat betekent nutri-score {{nutriScore}}?</h2>
-                    <div v-if="nutriScore === 'a'">
-                      <p class="text-xs text-gray-300 px-8">Dit product heeft een goede voedingswaarde. Het bevat meer gezonde voedingsstoffen en minder ongezonde ingrediënten.</p>
+            <div v-else-if="nutriScore === 'b'">
+              <img class="lg:w-96 w-64" src="/img/Nutri-score-B.svg.png" alt="Nutri-score B">
+            </div>
+            <div v-else-if="nutriScore === 'c'">
+              <img class="lg:w-96 w-64" src="/img/2560px-Nutri-score-C.svg.png" alt="Nutri-score C">
+            </div>
+            <div v-else-if="nutriScore === 'd'">
+              <img class="lg:w-96 w-64" src="/img/2560px-Nutri-score-D.svg.png" alt="Nutri-score D">
+            </div>
+            <div v-else-if="nutriScore === 'e'">
+              <img class="lg:w-96 w-64" src="/img/2560px-Nutri-score-E.svg.png" alt="Nutri-score E">
+            </div>
+
+            <div id="app">
+              <div class="flex flex-col items-center justify-center p-2 ">
+                <button
+                    @click="onToggleNutri"
+                    class="bg-orange-400 px-5 py-2 text-sm shadow-sm font-medium text-white rounded-md"
+                >
+                  Wat betekent dit?
+                </button>
+              </div>
+              <div v-if="isModalNutriVisible">
+                <div
+                    @click="onToggleNutri"
+                ></div>
+                <div class="w-full max-w-lg relative mx-auto my-auto rounded-xl shadow-lg bg-white">
+                  <div>
+                    <div class="text-center flex-auto justify-center">
+                      <h2 class="text-2xl font-bold py-4">Wat betekent nutri-score {{ nutriScore }}?</h2>
+                      <div v-if="nutriScore === 'a'">
+                        <p class="text-xs text-gray-300 px-8">Dit product heeft een goede voedingswaarde. Het bevat meer
+                          gezonde voedingsstoffen en minder ongezonde ingrediënten.</p>
+                      </div>
+                      <div v-else-if="nutriScore === 'b'">
+                        <p class="text-xs text-gray-500 px-8">Dit product is redelijk gezond, een product met A is
+                          gezonder. Er kunnen iets meer ongezonde ingrediënten in zitten.</p>
+                      </div>
+                      <div v-else-if="nutriScore === 'c'">
+                        <p class="text-xs text-gray-500 px-8">Dit product heeft een gemiddelde voedingswaarde. Het heeft
+                          gezonde en ongezonde ingrediënten.</p>
+                      </div>
+                      <div v-else-if="nutriScore === 'd'">
+                        <p class="text-xs text-gray-500 px-8">Dit product is minder gezond. Er zitten meer ongezonde
+                          ingrediënten in en minder gezonde voedingsstoffen.</p>
+                      </div>
+                      <div v-else-if="nutriScore === 'e'">
+                        <p class="text-xs text-black px-8">Dit product is minder gezond. Het bevat meer suiker, vet of
+                          zout en minder gezonde voedingsstoffen.</p>
+                      </div>
                     </div>
-                    <div v-else-if="nutriScore === 'b'">
-                      <p class="text-xs text-gray-500 px-8">Dit product is redelijk gezond, een product met A is gezonder. Er kunnen iets meer ongezonde ingrediënten in zitten.</p>
-                    </div>
-                    <div v-else-if="nutriScore === 'c'">
-                      <p class="text-xs text-gray-500 px-8">Dit product heeft een gemiddelde voedingswaarde. Het heeft gezonde en ongezonde ingrediënten.</p>
-                    </div>
-                    <div v-else-if="nutriScore === 'd'">
-                      <p class="text-xs text-gray-500 px-8">Dit product is minder gezond. Er zitten meer ongezonde ingrediënten in en minder gezonde voedingsstoffen.</p>
-                    </div>
-                    <div v-else-if="nutriScore === 'e'">
-                      <p class="text-xs text-black px-8">Dit product is minder gezond. Het bevat meer suiker, vet of zout en minder gezonde voedingsstoffen.</p>
-                    </div>
-                  </div>
-                  <div class="p-3 mt-2 text-center space-x-4 md:block">
-                    <button
-                        @click="onToggleNutri"
-                        class="mb-2 md:mb-0 bg-orange-400 px-5 py-2 text-sm shadow-sm font-medium text-white rounded-md">
+                    <div class="p-3 mt-2 text-center space-x-4 md:block">
+                      <button
+                          @click="onToggleNutri"
+                          class="mb-2 md:mb-0 bg-orange-400 px-5 py-2 text-sm shadow-sm font-medium text-white rounded-md">
                       Sluit
                     </button>
                   </div>

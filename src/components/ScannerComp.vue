@@ -32,7 +32,17 @@ import router from "../router";
     methods: {
       onDecode(a, b, c) {
         console.log(a, b, c);
-        router.push({ name: 'productpage', params: { barcode: a } })
+
+        // Opslaan in localStorage
+        const scannedBarcodes = JSON.parse(localStorage.getItem('scannedBarcodes')) || [];
+        if (!scannedBarcodes.includes(a)) {
+          scannedBarcodes.push(a);
+          localStorage.setItem('scannedBarcodes', JSON.stringify(scannedBarcodes));
+        }
+
+        // Navigeer naar de productpagina
+        router.push({ name: 'productpage', params: { barcode: a } });
+
         this.text = a;
         if (this.id) clearTimeout(this.id);
         this.id = setTimeout(() => {
