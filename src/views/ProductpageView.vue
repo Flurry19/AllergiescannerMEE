@@ -12,13 +12,14 @@ const closeModal = () => {
 };
 
 export default {
-  components: { AccordionPanel },
-  setup() {
+  components: {AccordionPanel},
+  setup (){
     const showPanel = ref(false);
-    return {
+    return{
       showPanel,
-    };
+    }
   },
+
   data() {
     return {
       productName: '',
@@ -37,34 +38,36 @@ export default {
       fiber: '',
       proteins: '',
       ingredients: '',
-      isOpenNutri: true,
-      isOpenEco: true,
+      isOpenNutri:true,
+      isOpenEco:true,
       barcode: '',
       favoriteBarcodes: [],
       allergensArray: [],
-      nonAllergensArray: [],
-      scannedProducts: [],
+      nonAllergensArray: []
+
     };
   },
   computed: {
-    isModalEcoVisible() {
+    isModalEcoVisible(){
       return !this.isOpenEco;
     },
-    isModalNutriVisible() {
+    isModalNutriVisible(){
       return !this.isOpenNutri;
     },
     isBarcodeInList() {
       return this.favoriteBarcodes.includes(this.barcode);
-    },
+    }
   },
   methods: {
-    allergenCheck() {
+    //With this function you check if the filtered allergens match the allergens in the product
+    allergenCheck(){
       const dataArray = this.allergens.split(',');
-      let items = localStorage.getItem('Ingredient');
+      let items = localStorage.getItem("Ingredient");
       items = JSON.parse(items);
       for (let i = 0; i < items.length; i++) {
         const allergen = items[i];
 
+        // Check if the allergen is not present in the product's allergens
         if (!dataArray.includes(allergen)) {
           this.nonAllergensArray.push(allergen);
         }
@@ -72,36 +75,36 @@ export default {
 
       for (let i = 0; i < dataArray.length; i++) {
         switch (dataArray[i]) {
-          case 'en:milk':
-            items.forEach((item) => {
-              if (item === 'en:milk' || item === 'Melk') {
-                this.allergensArray.push('Melk');
+          case "en:milk":
+            items.forEach(item => {
+              if(item === 'en:milk' || item === 'Melk') {
+                this.allergensArray.push("Melk")
               }
-            });
+            })
             break;
-          case 'en:nuts':
-            items.forEach((item) => {
-              if (item === 'en:nuts' || item === 'Noten') {
-                this.allergensArray.push('Noten');
+          case "en:nuts":
+            items.forEach(item => {
+              if(item === 'en:nuts' || item === 'Noten') {
+                this.allergensArray.push("Noten")
               }
-            });
+            })
             break;
-          case 'en:soybeans':
-            items.forEach((item) => {
-              if (item === 'en:soybeans' || item === 'Sojabonen') {
-                this.allergensArray.push('Sojabonen');
+          case "en:soybeans":
+            items.forEach(item => {
+              if(item === 'en:soybeans' || item === 'Sojabonen') {
+                this.allergensArray.push("Sojabonen")
               }
-            });
+            })
             break;
-          case 'en:egg':
-            items.forEach((item) => {
-              if (item === 'en:egg' || item === 'Ei') {
-                this.allergensArray.push('Ei');
+          case "en:egg":
+            items.forEach(item => {
+              if(item === 'en:egg' || item === 'Ei') {
+                this.allergensArray.push("Ei")
               }
-            });
+            })
             break;
           default:
-            console.log('Invalid allergen');
+            console.log("Invalid allergen");
         }
       }
     },
@@ -111,31 +114,35 @@ export default {
     onToggleEco() {
       this.isOpenEco = !this.isOpenEco;
     },
+
     toggleBarcode() {
+      // Toggle the barcode in the array
       if (this.isBarcodeInList) {
-        this.favoriteBarcodes = this.favoriteBarcodes.filter((b) => b !== this.barcode);
-      }
-      else {
+        this.favoriteBarcodes = this.favoriteBarcodes.filter(b => b !== this.barcode);
+      } else {
         this.favoriteBarcodes.push(this.barcode);
       }
+
+      // Save the updated array back to local storage
       localStorage.setItem('favoriteBarcodes', JSON.stringify(this.favoriteBarcodes));
-    },
+    }
   },
   mounted() {
-    this.barcode = this.$route.params.barcode;
+    this.barcode = this.$route.params.barcode; //Here goes the number of the scanned barcode (Stijn)
     this.favoriteBarcodes = JSON.parse(localStorage.getItem('favoriteBarcodes')) || [];
-    let barcode = this.barcode;
+    let barcode = this.barcode
 
-    let url = `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`;
+    let url = `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`; //The API in which he places the variable above
     fetch(url)
-        .then((response) => {
+        .then(response => {
           if (response.ok) {
             return response.json();
           } else {
-            throw new Error(`Error: ${response.status}`);
+            throw new Error('Error: ${response.status}');
           }
         })
-        .then((productInfo) => {
+        //Making a variable which you call in the HTML later
+        .then(productInfo => {
           this.productImage = productInfo.product.image_front_url;
           this.productName = productInfo.product.product_name;
           this.allergens = productInfo.product.allergens;
@@ -153,32 +160,19 @@ export default {
           this.proteins = productInfo.product.nutriments['proteins'];
           this.ingredients = productInfo.product.ingredients_text_nl;
 
-          this.$emit('productDataChanged', {
-            barcode: this.barcode,
-            productName: this.productName,
-            productImage: this.productImage,
-          });
+
+          this.$emit('productDataChanged', { barcode: this.barcode, productName: this.productName, productImage: this.productImage });
 
           this.allergenCheck();
 
-          // Voeg gescande product toe aan de scannedProducts array
-          const scannedProduct = {
-            barcode: this.barcode,
-            productName: this.productName,
-            productImage: this.productImage,
-            // voeg andere relevante informatie toe zoals allergens, nutriScore, etc.
-          };
-          // Update the scannedProducts array immediately
-          this.scannedProducts.push(scannedProduct);
-
-          // Sla de updated array terug op in de local storage
-          localStorage.setItem('scannedProducts', JSON.stringify(this.scannedProducts));
         })
-        .catch((error) => {
+        .catch(error => {
           console.error(error);
-        });
+        })
+
   },
 };
+
 </script>
 <template>
 
