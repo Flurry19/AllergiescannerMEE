@@ -6,17 +6,17 @@
         <!-- <img src="/img/MEE-23-11-2023.png" alt="Logo" class="h-26 w-26">-->
       </div>
 
-      <div class="mt-5 mb-5">
-        <p class="text-center text-3xl font-bold" :class="{ 'enlarged-text': isTextEnlarged }">Hier vindt u de producten die u in het verleden heeft gescand</p>
-      </div>
+<!--      <div class="mt-5 mb-5">-->
+<!--        <p class="text-center text-3xl font-bold" :class="{ 'enlarged-text': isTextEnlarged }">Hier vindt u de producten die u in het verleden heeft gescand</p>-->
+<!--      </div>-->
 
       <div class="flex flex-col items-center ">
-        <button @click="toggleColors" id="toggleColorButton" class="absolute top-0 right-11 m-4 p-0">
-          <img src="/img/darkmode.png" alt="logo">
-        </button>
-        <button @click="toggleTextSize" class="absolute top-0 right-0 m-5 p-0">
-          <img src="/img/3548527-200.png" alt="logo" class="h-10 w-10"> <!-- Adjust the h-6 and w-6 for your desired size -->
-        </button>
+<!--        <button @click="toggleColors" id="toggleColorButton" class="absolute top-0 right-11 m-4 p-0">-->
+<!--          <img src="/img/darkmode.png" alt="logo">-->
+<!--        </button>-->
+<!--        <button @click="toggleTextSize" class="absolute top-0 right-0 m-5 p-0">-->
+<!--          <img src="/img/3548527-200.png" alt="logo" class="h-10 w-10"> &lt;!&ndash; Adjust the h-6 and w-6 for your desired size &ndash;&gt;-->
+<!--        </button>-->
         <router-link to="/scanner" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full mb-5">Begin met scannen</router-link>
         <!-- Delete History Button -->
         <button @click="deleteHistory" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mb-5">
@@ -25,7 +25,7 @@
       </div>
 
       <div class="my-5">
-        <p class="text-center text-5xl font-bold">Uw gescande producten:</p>
+        <p class="text-center text-4xl font-bold">Mijn eerder gescande producten:</p>
       </div>
       <div class="bg-orange-500 mb-10 p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
         <favorite-card v-for="product in products" :barcode="product.barcode" :productImage="product.productImage" :productName="product.productName" :key="product.barcode" :product="product" :class="{ 'bg-orange-500': isOrange, 'bg-gray-200': !isOrange }" />
@@ -86,7 +86,7 @@ export default {
             .then(productInfo => {
               this.products.push({
                 barcode: barcode,
-                productName: productInfo.product.product_name_nl,
+                productName: productInfo.product.product_name,
                 productImage: productInfo.product.image_front_url,
               });
 

@@ -54,7 +54,7 @@ export default {
           // Update the favoriteProducts array with fetched information
           this.favoriteProducts.push({
             barcode: barcode,
-            productName: productInfo.product.product_name_nl,
+            productName: productInfo.product.product_name,
             productImage: productInfo.product.image_front_url,
           });
           console.log('information for a card is retrieved')
