@@ -1,14 +1,14 @@
 <template>
   <div>
-  <div class="pt-2 bg-white">
+  <div class="pt-2 bg-white z-0">
     <div>
-      <p class="text-center m-5 font-bold">Voedselallergieën</p>
+      <p class="text-center m-5 font-bold text-4xl mt-8">Voedselallergieën</p>
 
       <main class="text-center mb-20">
       <!-- Lijst van voedselallergieën -->
         <ul class="flex flex-col items-center justify-center">
           <li v-for="(ingredient, index) in ingredients" :key="index">
-            <button class="rounded-full bg-orange-500 hover:bg-orange-700 m-2 shadow-md font-bold flex p-1 min-w-[150px] items-center justify-center transform active:scale-75 transition-transform" @click="toggleCheck(ingredient)">
+            <button class="rounded-full bg-orange-500 hover:bg-orange-700 m-2 shadow-md font-bold flex p-1 min-w-[150px] items-center justify-center" @click="toggleCheck(ingredient)">
               {{ ingredient }}
             </button>
           </li>

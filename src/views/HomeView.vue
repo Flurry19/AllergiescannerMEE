@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div class="flex flex-col h-screen">
+    <div class="flex flex-col">
 
       <div class="bg-white flex-auto">
         <div class="text-center text-2xl lg:text-4xl font-bold mt-4 text-black font-bold text-center">
@@ -12,9 +12,11 @@
           <img class="w-1/2 lg:w-72" src="/img/Screenshot%202024-01-01%20131925.png" alt="Afbeelding van een telefoon met een barcode">
         </div>
 
+
         <div class="flex flex-col items-center ">
           
         </div>
+
 
         <div class="text-white text-center items-center flex flex-col pt-2">
           <router-link to="/ingredientlist" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full mb-5 w-1/2 flex flex-row lg:text-2xl lg:w-1/6 flex lg:items-center transform active:scale-75 transition-transform">Vul allergieën in

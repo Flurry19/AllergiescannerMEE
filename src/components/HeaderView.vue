@@ -6,11 +6,10 @@
     <div>
       <h1 class="text-white font-bold text-l lg:text-2xl my-0">MEE Rotterdam Rijnmond</h1>
     </div>
-    <div>
+
 <!--      <button>-->
 <!--        <img src="instructions-icon.png" alt="Instructions Icon">-->
 <!--      </button>-->
-    </div>
   </header>
 </template>
 <script>

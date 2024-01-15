@@ -6,12 +6,13 @@
         <!-- <img src="/img/MEE-23-11-2023.png" alt="Logo" class="h-26 w-26">-->
       </div>
 
-      <div class="mt-5 mb-5">
-        <p class="text-center text-3xl font-bold" :class="{ 'enlarged-text': isTextEnlarged }">Hier vindt u de producten die u in het verleden heeft gescand</p>
-      </div>
+<!--      <div class="mt-5 mb-5">-->
+<!--        <p class="text-center text-3xl font-bold" :class="{ 'enlarged-text': isTextEnlarged }">Hier vindt u de producten die u in het verleden heeft gescand</p>-->
+<!--      </div>-->
 
 
       <div class="flex flex-col items-center ">
+
         <router-link to="/scanner" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full mb-5">Begin met scannen</router-link>
         <!-- Delete History Button -->
         <button @click="deleteHistory" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mb-5">
@@ -19,8 +20,10 @@
         </button>
       </div>
 
+
       <div class="my-5" >
-        <p class="text-center text-5xl font-bold">Uw gescande producten:</p>
+        <p class="text-center text-4xl font-bold">Uw gescande producten:</p>
+
       </div>
 
       <div class="bg-orange-500 mb-10 p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
@@ -81,7 +84,7 @@ export default {
               // Update the scannedProducts array with fetched information
               this.scannedProducts.push({
                 barcode: barcode,
-                productName: productInfo.product.product_name_nl,
+                productName: productInfo.product.product_name,
                 productImage: productInfo.product.image_front_url,
               });
               console.log('Information for a card is retrieved');

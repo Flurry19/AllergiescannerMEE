@@ -1,6 +1,9 @@
 <template>
-    <div class="flex">
-        <div class="justify-around">
+  <div class="container mx-auto ">
+    <div class="flex flex-col">
+      <h1 class="text-4xl font-bold mt-4">Scan hier je product
+      </h1>
+        <div class="justify-around mx-auto m-8 h-[73vh]">
             <StreamBarcodeReader
             @decode="(a, b, c) => onDecode(a, b, c)"
             @loaded="() => onLoaded()"
@@ -9,6 +12,7 @@
             Input Value: {{ text || "Nothing" }}
         </div>
     </div>
+  </div>
   </template>
 
   <script>
@@ -56,5 +60,4 @@ import router from "../router";
   };
   </script>
 
-  <style scoped>
-  </style>
+
