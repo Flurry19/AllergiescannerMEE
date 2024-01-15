@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div class="flex flex-col">
+    <div class="flex flex-col h-screen lg:h-full">
 
       <div class="bg-white flex-auto">
         <div class="text-center text-2xl lg:text-4xl font-bold mt-4 text-black font-bold text-center">
